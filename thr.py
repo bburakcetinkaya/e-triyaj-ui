@@ -4,16 +4,17 @@ Created on Wed Apr 27 03:11:48 2022
 
 @author: ASUS
 """
-from threading import *
+import threading
+stopFlag = threading.Event()
 # from httpRequests import *
 # from Helper import *
 # from MainWindow import *
 # from printTable import *
 
 
-class UpdateTableThread(Thread):
+class UpdateTableThread(threading.Thread):
     def __init__(self,target,event):
-        Thread.__init__(self)
+        threading.Thread.__init__(self)
         self._target = target
         self._stopped = event
 

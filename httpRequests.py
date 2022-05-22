@@ -6,13 +6,14 @@ Created on Wed Apr 27 02:48:00 2022
 """
 
 import requests as rq
+from thr import *
 from PyQt5.QtWidgets import QMessageBox
 import pandas as pd
 from datetime import datetime
 import json
 import time
 
-url = "http://192.168.35.90"
+url = "http://localhost:8000"
 
 class HttpRequest:
 
@@ -22,6 +23,7 @@ class HttpRequest:
             # print(entries.url)
             items = pd.DataFrame(entries['items'])
             items.pop('id')
+            items.pop("role")
             items.sort_values(by=['time'], ascending=False,inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)             
@@ -34,69 +36,93 @@ class HttpRequest:
         else:
             # print("errordu")
             return items
+        # finally:
+            
         
     def getEntriesByDateInterval(self,startDate,endDate):
+        emptyDict = {}
         try:#http://192.168.1.103/users/startDate/2022-04-30/endDate/2022-04-30
-            emptyDict = {}
             entries = rq.get(url +'/users/startDate/' + startDate +'/endDate/' +endDate).json()
             # print(entries.status_code)
             items = pd.DataFrame(entries['items'])
             items.pop('id')
+            items.pop("role")
             items.sort_values(by=['time','date'], ascending=[False,False],inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)  
+            return items
         except:
             # error_ui = Ui_ErrorWindow()
             # error_ui.setErrorMessage('Could not update table')
             # error_ui.setupUi()
             # print(entries)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Fail")
+            msg.setInformativeText('Failed to find records.')
+            msg.setWindowTitle("Fail")
+            stopFlag.set()
+            msg.exec_()            
             print("could not send request")
-            return pd.DataFrame(emptyDict)
+            items = pd.DataFrame(emptyDict)
+            return items
         else:
             # print(entries)
             print("OK")
-            return items  
+            return items
+        finally:
+            return items
             
     def getEntriesByDateIntervalAndTc(self,startDate,endDate,tc):
-        try:#/users/tc/{tc}/startDate/{startDate}/endDate/{endDate}
-            emptyDict = {}
+        
+        emptyDict = {}
+        try:#/users/tc/{tc}/startDate/{startDate}/endDate/{endDate}            
             entries = rq.get(url +'/users/tc/'+ tc+'/startDate/' + startDate +'/endDate/' + endDate).json()
             items = pd.DataFrame(entries['items'])
             items.pop('id')
+            items.pop("role")
             items.sort_values(by=['time','date'], ascending=[False,False],inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)  
+            return items
         except:
             # error_ui = Ui_ErrorWindow()
             # error_ui.setErrorMessage('Could not update table')
             # error_ui.setupUi()
+            # print(entries)
             print("could not send request")
-            return pd.DataFrame(emptyDict)
+            items = pd.DataFrame(emptyDict)
+            return items
         else:
-            print("errordu")
-            return items  
+            # print(entries)
+            print("OK")
+            return items
+        finally:
+            return items
         
-    def getAllEntries(self):
-        try:         
-            emptyDict = {}
-            entries = rq.get(url +'/users/getAll').json()
-            items = pd.DataFrame(entries['items'])
-            items.pop('id')
-            items.sort_values(by=['time'], ascending=False,inplace=True)
-            items.reset_index(drop=True, inplace=True)
-            items.columns = map(str.upper, items.columns)  
-        except:
-            # error_ui = Ui_ErrorWindow()
-            # error_ui.setErrorMessage('Could not update table')
-            # error_ui.setupUi()
-            print("could not send request")
-            return pd.DataFrame(emptyDict)
-        else:
-            print("errordu")
-            return items  
+    # def getAllEntries(self):
+    #         emptyDict = {}
+    #     try:    
+            
+    #         entries = rq.get(url +'/users/getAll').json()
+    #         items = pd.DataFrame(entries['items'])
+    #         items.pop('id')
+    #         items.sort_values(by=['time'], ascending=False,inplace=True)
+    #         items.reset_index(drop=True, inplace=True)
+    #         items.columns = map(str.upper, items.columns)  
+    #     except:
+    #         # error_ui = Ui_ErrorWindow()
+    #         # error_ui.setErrorMessage('Could not update table')
+    #         # error_ui.setupUi()
+    #         print("could not send request")
+    #         return pd.DataFrame(emptyDict)
+    #     else:
+    #         print("errordu")
+    #         return items  
         
     def postEntry(self,name,surname,age,gender,tc,sp02,heartRate,
                         temperature,systolicBP,diastolicBP):
+        # stopFlag.set()
         self.postData = {
                           "id": 0,
                           "name": "string",
@@ -130,8 +156,9 @@ class HttpRequest:
         self.jsonPostData = json.dumps(self.postData)
 
         try:
-            x = rq.post(url + '/users/createUser', data = self.jsonPostData) 
-            time.sleep(3)      
+            x = rq.post(url + '/users/createUser', data = self.jsonPostData)
+            
+            # time.sleep(3)      
 
         except: 
             msg = QMessageBox()
@@ -147,6 +174,10 @@ class HttpRequest:
             msg.setInformativeText('Patient record entered successfully.')
             msg.setWindowTitle("Success")
             msg.exec_()
+        # finally:            
+        #     stopFlag.clear()
+        
+            
             
         
   

@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from thr import *
 from MainWindow import *
-stopFlag = Event()
+
 
 def main():
     import sys

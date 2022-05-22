@@ -14,7 +14,7 @@ from GraphWindow import *
 from Helper import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from thr import *
-stopFlag = Event()
+# stopFlag = Event()
 
 
 class Ui_MainWindow(object):
@@ -105,13 +105,7 @@ class Ui_MainWindow(object):
         helper = Helper()
         hr = HttpRequest()
         data = hr.getEntriesByDateInterval(helper.getYesterday(),helper.getDate())
-        if data.empty:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Fail")
-            msg.setInformativeText('Failed to find records.')
-            msg.setWindowTitle("Fail")
-            msg.exec_()
+        if data.empty:            
             return
         toPrint = PrintTable(data)
         self.entryTable.setModel(toPrint)
@@ -121,18 +115,17 @@ class Ui_MainWindow(object):
         manualEntryWindow = QtWidgets.QMainWindow()
         ui = Ui_manualEntryWindow()
         ui.setupUi(manualEntryWindow)
-        manualEntryWindow.show()
-        
+        manualEntryWindow.show()        
         manualEntryWindow.exec_()
         
     def openGraphWindow(self,signal):
+        
         GraphWindow = QtWidgets.QMainWindow()
         ui = Ui_GraphWindow()
         ui.setupUi(GraphWindow)
         self._tc = signal.sibling(signal.row(),4).data()
         ui.updateInformation(self._tc)
-        GraphWindow.show()
-        
+        GraphWindow.show()        
         GraphWindow.exec_()
         
         
