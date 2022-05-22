@@ -122,7 +122,6 @@ class HttpRequest:
         
     def postEntry(self,name,surname,age,gender,tc,sp02,heartRate,
                         temperature,systolicBP,diastolicBP):
-        # stopFlag.set()
         self.postData = {
                           "id": 0,
                           "name": "string",
@@ -174,8 +173,9 @@ class HttpRequest:
             msg.setInformativeText('Patient record entered successfully.')
             msg.setWindowTitle("Success")
             msg.exec_()
-        # finally:            
-        #     stopFlag.clear()
+        finally:
+            stopFlag.clear()
+
         
             
             

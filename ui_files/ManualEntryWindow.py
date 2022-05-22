@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from httpRequests import *
 
 
 class Ui_manualEntryWindow(object):
@@ -23,9 +22,6 @@ class Ui_manualEntryWindow(object):
         manualEntryWindow.setSizePolicy(sizePolicy)
         manualEntryWindow.setMinimumSize(QtCore.QSize(527, 563))
         manualEntryWindow.setMaximumSize(QtCore.QSize(527, 563))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        manualEntryWindow.setWindowIcon(icon)
         manualEntryWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.line = QtWidgets.QFrame(manualEntryWindow)
         self.line.setGeometry(QtCore.QRect(10, 50, 491, 16))
@@ -37,7 +33,7 @@ class Ui_manualEntryWindow(object):
         self.label_2 = QtWidgets.QLabel(manualEntryWindow)
         self.label_2.setGeometry(QtCore.QRect(12, 12, 503, 51))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("logo/e-triage_manual_entry_form.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("../logo/e-triage_manual_entry_form.png"))
         self.label_2.setObjectName("label_2")
         self.widget = QtWidgets.QWidget(manualEntryWindow)
         self.widget.setGeometry(QtCore.QRect(12, 70, 491, 435))
@@ -87,7 +83,7 @@ class Ui_manualEntryWindow(object):
 "    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
 "QComboBox::down-arrow {\n"
-"    image: url(logo/down_arrow.png);\n"
+"    image: url(../logo/down_arrow.png);\n"
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
@@ -96,10 +92,10 @@ class Ui_manualEntryWindow(object):
         self.genderComboBox.setObjectName("genderComboBox")
         self.genderComboBox.addItem("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("logo/male_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../logo/male_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.genderComboBox.addItem(icon, "")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("logo/female_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../logo/female_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.genderComboBox.addItem(icon1, "")
         self.gridLayout_2.addWidget(self.genderComboBox, 4, 1, 1, 1)
         self.surnameLabel = QtWidgets.QLabel(self.widget)
@@ -307,9 +303,9 @@ class Ui_manualEntryWindow(object):
         self.manualEntryDiscardButton.setText(_translate("manualEntryWindow", "Discard"))
     def onEnterClicked(self):
         
-        name = self.nameEdit.text()
-        surname = self.surnameEdit.text()
-        age = self.ageEdit.text()
+        name = self.nameEdit.toPlainText()
+        surname = self.surnameEdit.toPlainText()
+        age = self.ageEdit.toPlainText()
         genderIndex = self.genderComboBox.currentIndex()
         # 0 DEĞERİ DEĞİŞTİRİLECEK
         if genderIndex == 0:
@@ -320,12 +316,12 @@ class Ui_manualEntryWindow(object):
             gender = "FEMALE"
             
        
-        tc = self.tcEdit.text()
-        sp02 = self.spO2Edit.text()
-        heartRate = self.heartRateEdit.text()
-        temperature = self.temperatureEdit.text()
-        systolicBP = self.systolicBpEdit.text()
-        diastolicBp = self.diastolicBpEdit.text()
+        tc = self.tcEdit.toPlainText()
+        sp02 = self.spO2Edit.toPlainText()
+        heartRate = self.heartRateEdit.toPlainText()
+        temperature = self.temperatureEdit.toPlainText()
+        systolicBP = self.systolicBpEdit.toPlainText()
+        diastolicBp = self.diastolicBpEdit.toPlainText()
         
         
         hr = HttpRequest()

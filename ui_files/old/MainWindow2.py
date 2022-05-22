@@ -25,9 +25,6 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(0, 0))
         MainWindow.setMaximumSize(QtCore.QSize(16777215, 16777215))
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("gridline-color: rgb(0, 0, 100);\n"
 "background-color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -51,7 +48,7 @@ class Ui_MainWindow(object):
         self.eTriageLogo.setStyleSheet("background-color: transparent;")
         self.eTriageLogo.setText("")
         self.eTriageLogo.setTextFormat(QtCore.Qt.AutoText)
-        self.eTriageLogo.setPixmap(QtGui.QPixmap("logo/e-triage.png"))
+        self.eTriageLogo.setPixmap(QtGui.QPixmap("../logo/e-triage.png"))
         self.eTriageLogo.setScaledContents(True)
         self.eTriageLogo.setWordWrap(True)
         self.eTriageLogo.setObjectName("eTriageLogo")
@@ -60,7 +57,6 @@ class Ui_MainWindow(object):
         self.headerHorizontalLayout.addItem(spacerItem1)
         self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.centralwidget)
         self.dateTimeEdit.setEnabled(True)
-        self.dateTimeEdit.setReadOnly(True)
         self.dateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -92,13 +88,7 @@ class Ui_MainWindow(object):
         self.tableHorizontalLayout.addWidget(self.tableView)
         self.tableView.verticalHeader().hide()
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
-        self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.tableView.setGridStyle(QtCore.Qt.DashLine)
-        # header = self.tableView.horizontalHeader()       
-        # header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
-        # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        self.entryTable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.doubleClicked.connect(self.openGraphWindow)
         
         self.gridLayout.addLayout(self.tableHorizontalLayout, 4, 0, 1, 1)
@@ -155,10 +145,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.searchHorizontalLayout, 3, 0, 1, 1)
         self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setStyleSheet("color: rgb(85, 85, 255);")
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.line_2.setLineWidth(2)
-        self.line_2.setMidLineWidth(1)
         self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.gridLayout.addWidget(self.line_2, 0, 0, 1, 1)
         self.gridLayout.setRowStretch(0, 1)
@@ -217,7 +205,7 @@ class Ui_MainWindow(object):
                 return
             
         toPrint = PrintTable(data)
-        self.tableView.setModel(toPrint)
+        self.entryTable.setModel(toPrint)
         
     def openManualEntryWindow(self):
 

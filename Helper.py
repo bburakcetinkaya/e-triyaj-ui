@@ -17,7 +17,8 @@ class Helper(object):
         now = datetime.now()
         current_time = now.strftime("%H.%M.%S")
         return current_time
-    def getYesterday(self):
-        yesterday = datetime.today() - timedelta(days=1)
-        yesterday = yesterday.strftime("%Y-%m-%d")
-        return yesterday
+    def getPreviousNthDay(self,n):
+        previous = datetime.today() - timedelta(days=n)
+        previous = previous.strftime("%Y-%m-%d")
+        return previous
+        
