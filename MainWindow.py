@@ -231,8 +231,8 @@ class Ui_MainWindow(object):
         
         GraphWindow = QtWidgets.QMainWindow()
         ui = Ui_GraphWindow()
-        ui.setupUi(GraphWindow)
         self._tc = signal.sibling(signal.row(),4).data()
+        ui.setupUi(GraphWindow,self._tc)        
         ui.updateInformation(self._tc)
         GraphWindow.show()        
         GraphWindow.exec_()

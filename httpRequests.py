@@ -13,7 +13,7 @@ from datetime import datetime
 import json
 import time
 
-url = "http://localhost:8000"
+url = "http://10.140.3.200:8000"
 
 class HttpRequest:
 

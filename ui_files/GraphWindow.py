@@ -22,8 +22,7 @@ import pyqtgraph as pg
 
 
 class Ui_GraphWindow(object):
-    def setupUi(self, GraphWindow,windowName):
-        self._windowName = windowName
+    def setupUi(self, GraphWindow):
         GraphWindow.setObjectName("GraphWindow")
         GraphWindow.resize(1031, 631)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -148,7 +147,7 @@ class Ui_GraphWindow(object):
 "    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
 "QDateEdit::down-arrow {\n"
-"    image: url(logo/down_arrow.png);\n"
+"    image: url(../logo/down_arrow.png);\n"
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
@@ -176,7 +175,7 @@ class Ui_GraphWindow(object):
 "    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
 "QDateEdit::down-arrow {\n"
-"    image: url(logo/down_arrow.png);\n"
+"    image: url(../logo/down_arrow.png);\n"
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
@@ -228,7 +227,7 @@ class Ui_GraphWindow(object):
 
     def retranslateUi(self, GraphWindow):
         _translate = QtCore.QCoreApplication.translate
-        GraphWindow.setWindowTitle(_translate("GraphWindow", self._windowName))
+        GraphWindow.setWindowTitle(_translate("GraphWindow", "Analysis Window"))
         self.nameLabel.setText(_translate("GraphWindow", "Name:"))
         self.surnameLabel.setText(_translate("GraphWindow", "Surname:"))
         self.tcLabel.setText(_translate("GraphWindow", "T.C. No:"))
@@ -245,7 +244,7 @@ class Ui_GraphWindow(object):
         self.endDateEdit.setMinimumDate(self.startDateEdit.date())
         self.startDateEdit.setMaximumDate(self.endDateEdit.date())
         self.endDateEdit.setMaximumDate(datetime.today())
-        tc = self.tcEdit.text()
+        tc = self.tcEdit.toPlainText()
         startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
         endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
         hr = HttpRequest()
@@ -298,9 +297,9 @@ class Ui_GraphWindow(object):
         self.purpleMarker = pg.mkBrush(color=(106, 13, 173))
         
         
-        self.plotWdgt.setBackground('w')
+        self.plotWdgt.setBackground('k')
         self.legend = self.plotWdgt.addLegend(pen = 'k')
-        self.legend.setBrush('grey')
+        self.legend.setBrush('w')
         # self.legend.pen()
         self.plotWdgt.showGrid(x=True, y=True)
         
