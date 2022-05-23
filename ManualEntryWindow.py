@@ -286,6 +286,8 @@ class Ui_manualEntryWindow(object):
 
         self.retranslateUi(manualEntryWindow)
         QtCore.QMetaObject.connectSlotsByName(manualEntryWindow)
+        
+
 
     def retranslateUi(self, manualEntryWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -305,6 +307,8 @@ class Ui_manualEntryWindow(object):
         self.temperatureLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Temperature:</span></p></body></html>"))
         self.manualEntryEnterButton.setText(_translate("manualEntryWindow", "Enter"))
         self.manualEntryDiscardButton.setText(_translate("manualEntryWindow", "Discard"))
+    def closing(self,flag=False):
+        return flag
     def onEnterClicked(self):
         
         name = self.nameEdit.text()
@@ -332,7 +336,9 @@ class Ui_manualEntryWindow(object):
         hr.postEntry(name,surname,age,gender,tc,sp02,heartRate,
                             temperature,systolicBP,diastolicBp)
         
-        self.close()
+        
+        self.closing(True)
+        # QtCore.QCoreApplication.instance().quit()
     def onDiscardClicked(self):
         self.nameEdit.clear()
         self.surnameEdit.clear()

@@ -12,7 +12,7 @@ def main():
     ui.setupUi(MainWindow)
     ui.updateTable()
     thread = UpdateTableThread(ui.updateTable,stopFlag)
-    thread.start()  
+    thread.start()
     MainWindow.show()      
     app.aboutToQuit.connect(stopFlag.set)
     

@@ -64,10 +64,10 @@ class Ui_GraphWindow(object):
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(GraphWindow.sizePolicy().hasHeightForWidth())
+        GraphWindow.setSizePolicy(sizePolicy)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         GraphWindow.setWindowIcon(icon)
-        GraphWindow.setSizePolicy(sizePolicy)
         GraphWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.gridLayoutWidget = QtWidgets.QWidget(GraphWindow)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(11, 11, 1011, 611))
@@ -152,24 +152,6 @@ class Ui_GraphWindow(object):
         self.horizontalLayout.addWidget(self.ageEdit)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.manualEntryButton = QtWidgets.QPushButton(self.gridLayoutWidget)
-        self.manualEntryButton.setStyleSheet("QPushButton {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 10em;\n"
-"    padding: 6px;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    border-style: inset;\n"
-"}")
-        self.manualEntryButton.setObjectName("manualEntryButton")
-        self.horizontalLayout.addWidget(self.manualEntryButton)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.line = QtWidgets.QFrame(self.gridLayoutWidget)
         self.line.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -184,6 +166,7 @@ class Ui_GraphWindow(object):
         self.startDateLabel.setObjectName("startDateLabel")
         self.horizontalLayout_2.addWidget(self.startDateLabel)
         self.startDateEdit = QtWidgets.QDateEdit(self.gridLayoutWidget)
+        self.startDateEdit.setDate(QtCore.QDate.currentDate())
         self.startDateEdit.setStyleSheet("QDateEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -200,20 +183,24 @@ class Ui_GraphWindow(object):
 "    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
 "QDateEdit::down-arrow {\n"
-"    image: url(../logo/down_arrow.png);\n"
+"    image: url(logo/down_arrow.png);\n"
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
+        # fmt = self.startDateEdit.headerTextFormat()
+        # fmt.setForeground(QtGui.QColor('green'))
+        # fmt.setBackground(QtGui.QColor('orange'))
+        # self.startDateEdit.setHeaderTextFormat(fmt)
         self.startDateEdit.setAccelerated(True)
         self.startDateEdit.setCalendarPopup(True)
-        self.startDateEdit.setObjectName("startDateEdit")
-        self.startDateEdit.setDate(QtCore.QDate.currentDate())
         self.startDateEdit.setCalendarWidget(calendarWidgetStart)
+        self.startDateEdit.setObjectName("startDateEdit")
         self.horizontalLayout_2.addWidget(self.startDateEdit)
         self.editDateLabel = QtWidgets.QLabel(self.gridLayoutWidget)
         self.editDateLabel.setObjectName("editDateLabel")
         self.horizontalLayout_2.addWidget(self.editDateLabel)
         self.endDateEdit = QtWidgets.QDateEdit(self.gridLayoutWidget)
+        self.endDateEdit.setDate(QtCore.QDate.currentDate())
         self.endDateEdit.setStyleSheet("QDateEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -230,15 +217,17 @@ class Ui_GraphWindow(object):
 "    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
 "QDateEdit::down-arrow {\n"
-"    image: url(../logo/down_arrow.png);\n"
+"    image: url(logo/down_arrow.png);\n"
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
+       
+        
+# "}")
         self.endDateEdit.setAccelerated(True)
         self.endDateEdit.setCalendarPopup(True)
-        self.endDateEdit.setObjectName("endDateEdit")
-        self.endDateEdit.setDate(QtCore.QDate.currentDate())
         self.endDateEdit.setCalendarWidget(calendarWidgetEnd)
+        self.endDateEdit.setObjectName("endDateEdit")
         self.horizontalLayout_2.addWidget(self.endDateEdit)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
@@ -254,56 +243,6 @@ class Ui_GraphWindow(object):
         self.gridLayout_3 = QtWidgets.QGridLayout()
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.graphicsView = QtWidgets.QGraphicsView(self.graphTab)
-        self.graphicsView.setStyleSheet("QScrollBar:vertical {           \n"
-"                            border: 1px solid #999999;\n"
-"                           background:white;\n"
-"                            width:10px;    \n"
-"                            margin: 0px 0px 0px 0px;\n"
-"                        }\n"
-"                       QScrollBar::handle:vertical {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
-"                            min-height: 0px;\n"
-"                        }\n"
-"                        QScrollBar::add-line:vertical {\n"
-"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0px;\n"
-"                          subcontrol-position: bottom;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"                        QScrollBar::sub-line:vertical {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0 px;\n"
-"                          subcontrol-position: top;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"QScrollBar:horizontal {           \n"
-"                            border: 1px solid #999999;\n"
-"                           background:white;\n"
-"                            width:10px;    \n"
-"                            margin: 0px 0px 0px 0px;\n"
-"                        }\n"
-"                       QScrollBar::handle:horizontal {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
-"                            min-height: 0px;\n"
-"                        }\n"
-"                        QScrollBar::add-line:horizontal {\n"
-"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0px;\n"
-"                          subcontrol-position: bottom;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"                        QScrollBar::sub-line:horizontal {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0 px;\n"
-"                          subcontrol-position: top;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }")
         self.graphicsView.setObjectName("graphicsView")
         self.gridLayout_3.addWidget(self.graphicsView, 0, 0, 1, 1)
         self.gridLayout_6.addLayout(self.gridLayout_3, 0, 0, 1, 1)
@@ -315,58 +254,6 @@ class Ui_GraphWindow(object):
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.tableView = QtWidgets.QTableView(self.tableTab)
-        self.tableView.setStyleSheet("QScrollBar:vertical {           \n"
-"                            border: 1px solid #999999;\n"
-"                           background:white;\n"
-"                            width:10px;    \n"
-"                            margin: 0px 0px 0px 0px;\n"
-"                        }\n"
-"                       QScrollBar::handle:vertical {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
-"                            min-height: 0px;\n"
-"                        }\n"
-"                        QScrollBar::add-line:vertical {\n"
-"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0px;\n"
-"                          subcontrol-position: bottom;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"                        QScrollBar::sub-line:vertical {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0 px;\n"
-"                          subcontrol-position: top;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"QScrollBar:horizontal {           \n"
-"                            border: 1px solid #999999;\n"
-"                           background:white;\n"
-"                            width:10px;    \n"
-"                            margin: 0px 0px 0px 0px;\n"
-"                        }\n"
-"                       QScrollBar::handle:horizontal {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
-"                            min-height: 0px;\n"
-"                        }\n"
-"                        QScrollBar::add-line:horizontal {\n"
-"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0px;\n"
-"                          subcontrol-position: bottom;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }\n"
-"                        QScrollBar::sub-line:horizontal {\n"
-"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
-"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
-"                            height: 0 px;\n"
-"                          subcontrol-position: top;\n"
-"                            subcontrol-origin: margin;\n"
-"                        }")
-        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.tableView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableView.setObjectName("tableView")
         self.gridLayout_4.addWidget(self.tableView, 0, 0, 1, 1)
         self.gridLayout_5.addLayout(self.gridLayout_4, 0, 0, 1, 1)
@@ -378,12 +265,11 @@ class Ui_GraphWindow(object):
         self.gridLayout.setRowStretch(3, 50)
 
         self.retranslateUi(GraphWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(GraphWindow)
         
         self.startDateEdit.dateChanged.connect(self.updateInformationByDate)
         self.endDateEdit.dateChanged.connect(self.updateInformationByDate)
-
 
     def retranslateUi(self, GraphWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -392,14 +278,57 @@ class Ui_GraphWindow(object):
         self.surnameLabel.setText(_translate("GraphWindow", "Surname:"))
         self.tcLabel.setText(_translate("GraphWindow", "T.C. No:"))
         self.ageLabel.setText(_translate("GraphWindow", "Age:"))
-        self.manualEntryButton.setText(_translate("GraphWindow", "Manual Entry"))
         self.startDateLabel.setText(_translate("GraphWindow", "Start Date:"))
         self.startDateEdit.setDisplayFormat(_translate("GraphWindow", "d/M/yyyy"))
         self.editDateLabel.setText(_translate("GraphWindow", "End Date:"))
         self.endDateEdit.setDisplayFormat(_translate("GraphWindow", "d/M/yyyy"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.graphTab), _translate("GraphWindow", "Graph"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tableTab), _translate("GraphWindow", "Table"))
-
+        
+    # def updateGraph(self,date):
+    #     print(date)
+    #     self.endDateEdit.setMinimumDate(self.startDateEdit.date())
+    #     self.startDateEdit.setMaximumDate(self.endDateEdit.date())
+    #     self.endDateEdit.setMaximumDate(datetime.today())
+    #     tc = self.tcEdit.text()
+    #     startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
+    #     endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
+    #     hr = HttpRequest()
+    #     df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc)
+        
+    #     if df.empty:
+    #         msg = QMessageBox()
+    #         msg.setIcon(QMessageBox.Information)
+    #         msg.setText("Error")
+    #         msg.setInformativeText('No records found!')
+    #         msg.setWindowTitle("Error")
+    #         msg.exec_()
+    #         self.endDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+    #         self.startDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())            
+    #     else:
+    #         self.printGraph(df)
+    # def updateTable(self,date):
+    #     self.endDateEdit.setMinimumDate(self.startDateEdit.date())
+    #     self.startDateEdit.setMaximumDate(self.endDateEdit.date())
+    #     self.endDateEdit.setMaximumDate(datetime.today())
+    #     tc = self.tcEdit.text()
+    #     startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
+    #     endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
+    #     hr = HttpRequest()
+    #     df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc)
+        
+    #     if df.empty:
+    #         msg = QMessageBox()
+    #         msg.setIcon(QMessageBox.Information)
+    #         msg.setText("Error")
+    #         msg.setInformativeText('No records found!')
+    #         msg.setWindowTitle("Error")
+    #         msg.exec_()
+    #         self.endDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+    #         self.startDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())            
+    #     else:
+    #         self.printTable(df)
+            
     def printTable(self,data):
 
         toPrint = PrintTable(data)

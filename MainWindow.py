@@ -16,6 +16,33 @@ from GraphWindow import *
 from Helper import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from thr import *
+dataHolder = pd.DataFrame({})
+# scrollStyle = str("QScrollBar:vertical {\n"              
+#                 "    border: 1px solid #999999;\n"
+#                 "    background:white;\n"
+#                 "    width:10px;    \n"
+#                 "    margin: 0px 0px 0px 0px;\n"
+#                 "}\n"
+#                 "QScrollBar::handle:vertical {\n"
+#                 "    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+#                 "    stop: 0 rgb(32, 47, 130), stop: 0.5 rgb(32, 47, 130), stop:1 rgb(32, 47, 130));\n"
+#                 "    min-height: 0px;\n"
+#                 "}\n"
+#                 "QScrollBar::add-line:vertical {\n"
+#                 "    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+#                 "    stop: 0 rgb(32, 47, 130), stop: 0.5 rgb(32, 47, 130),  stop:1 rgb(32, 47, 130));\n"
+#                 "    height: 0px;\n"
+#                 "    subcontrol-position: bottom;\n"
+#                 "    subcontrol-origin: margin;\n"
+#                 "}\n"
+#                 "QScrollBar::sub-line:vertical {\n"
+#                 "    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+#                 "    stop: 0  rgb(32, 47, 130), stop: 0.5 rgb(32, 47, 130),  stop:1 rgb(32, 47, 130));\n"
+#                 "    height: 0 px;\n"
+#                 "    subcontrol-position: top;\n"
+#                 "    subcontrol-origin: margin;\n"
+#                 "}\n")
+
 
 
 class Ui_MainWindow(object):
@@ -94,7 +121,57 @@ class Ui_MainWindow(object):
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.tableView.setGridStyle(QtCore.Qt.DashLine)
+        self.tableView.setGridStyle(QtCore.Qt.DashLine)        
+        self.tableView.setStyleSheet("QScrollBar:vertical {           \n"
+"                            border: 1px solid #999999;\n"
+"                           background:white;\n"
+"                            width:10px;    \n"
+"                            margin: 0px 0px 0px 0px;\n"
+"                        }\n"
+"                       QScrollBar::handle:vertical {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
+"                            min-height: 0px;\n"
+"                        }\n"
+"                        QScrollBar::add-line:vertical {\n"
+"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
+"                            height: 0px;\n"
+"                          subcontrol-position: bottom;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"                        QScrollBar::sub-line:vertical {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
+"                            height: 0 px;\n"
+"                          subcontrol-position: top;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"QScrollBar:horizontal {           \n"
+"                            border: 1px solid #999999;\n"
+"                           background:white;\n"
+"                            width:10px;    \n"
+"                            margin: 0px 0px 0px 0px;\n"
+"                        }\n"
+"                       QScrollBar::handle:horizontal {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));\n"
+"                            min-height: 0px;\n"
+"                        }\n"
+"                        QScrollBar::add-line:horizontal {\n"
+"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
+"                            height: 0px;\n"
+"                          subcontrol-position: bottom;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"                        QScrollBar::sub-line:horizontal {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));\n"
+"                            height: 0 px;\n"
+"                          subcontrol-position: top;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }")
         # header = self.tableView.horizontalHeader()       
         # header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
@@ -183,6 +260,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
+        tableThread = UpdateTableThread(self.updateTable,stopFlag)
+        tableThread.start()
+        timeThread = UpdateTimeThread(self.updateTime,stopFlag)
+        timeThread.start()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -191,50 +273,74 @@ class Ui_MainWindow(object):
         self.manualEntryButton.setText(_translate("MainWindow", "Manual Entry"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionSave.setText(_translate("MainWindow", "Save Table"))
-    
+    def updateTime(self):
+        self.dateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
     def updateTable(self):
-        stopFlag.set()
         helper = Helper()
-        dayToBegin = helper.getPreviousNthDay(1)
+        print("hello there")
+        dayToBegin = helper.getPreviousNthDay(10)
         today = helper.getDate()
         hr = HttpRequest()
-        data = pd.DataFrame({})    
-        cnt = 1
-        while data.empty:  
+        data = pd.DataFrame({})
+        # dayToBegin = helper.getPreviousNthDay(cnt+1)
+        data = hr.getEntriesByDateInterval(dayToBegin,today)
+        global dataHolder
+        if data.empty:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("No records.")
+            msg.setInformativeText('No records found in past 10 days.')
+            msg.setWindowTitle("No records.")
+            msg.adjustSize()                
+            msg.exec_()       
+            return
+        if data.equals(dataHolder):
+            return
+        else:
+            print(dataHolder)
+            dataHolder = pd.concat([data,dataHolder]).drop_duplicates().reset_index(drop=True)
+            data.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
+            data.reset_index(drop=True, inplace=True)
+            data.columns = map(str.upper, data.columns) 
+            toPrint = PrintTable(data)
+            self.tableView.setModel(toPrint)
             
-            dayToBegin = helper.getPreviousNthDay(cnt+1)
-            data = hr.getEntriesByDateInterval(dayToBegin,today)
-            print(dayToBegin,"    ",today)
-            cnt += 1 
-            if cnt == 10:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
-                msg.setText("No records.")
-                msg.setInformativeText('No records found in past 10 days.')
-                msg.setWindowTitle("No records.")
-                msg.adjustSize()                
-                msg.exec_()       
-                return
+        # cnt = 1
+        # while data.empty:  
             
-        toPrint = PrintTable(data)
-        self.tableView.setModel(toPrint)
+        #     dayToBegin = helper.getPreviousNthDay(cnt+1)
+        #     data = hr.getEntriesByDateInterval(dayToBegin,today)
+        #     print(dayToBegin,"    ",today)
+        #     cnt += 1 
+        #     if cnt == 10:
+        #         msg = QMessageBox()
+        #         msg.setIcon(QMessageBox.Information)
+        #         msg.setText("No records.")
+        #         msg.setInformativeText('No records found in past 10 days.')
+        #         msg.setWindowTitle("No records.")
+        #         msg.adjustSize()                
+        #         msg.exec_()       
+        #         return
+
+            
+
         
     def openManualEntryWindow(self):
-
+        global manualEntryWindow
         manualEntryWindow = QtWidgets.QMainWindow()
-        ui = Ui_manualEntryWindow()
-        ui.setupUi(manualEntryWindow)
-        manualEntryWindow.show()        
-        manualEntryWindow.exec_()
+        self.entryUi = Ui_manualEntryWindow()
+        self.entryUi.setupUi(manualEntryWindow)
+        manualEntryWindow.show() 
         
     def openGraphWindow(self,signal):
         
+        global GraphWindow
         GraphWindow = QtWidgets.QMainWindow()
-        ui = Ui_GraphWindow()
+        self.graphUi = Ui_GraphWindow()
         self._tc = signal.sibling(signal.row(),4).data()
-        ui.setupUi(GraphWindow,self._tc)        
-        ui.updateInformation(self._tc)
+        self.graphUi.setupUi(GraphWindow,self._tc)        
+        self.graphUi.updateInformation(self._tc)
         GraphWindow.show()        
-        GraphWindow.exec_()
+        # GraphWindow.exec_()
         
 

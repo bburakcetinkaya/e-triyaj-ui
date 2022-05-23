@@ -13,7 +13,7 @@ from datetime import datetime
 import json
 import time
 
-url = "http://10.140.3.200:8000"
+url = "http://localhost:8000"
 
 class HttpRequest:
 
@@ -24,7 +24,7 @@ class HttpRequest:
             items = pd.DataFrame(entries['items'])
             items.pop('id')
             items.pop("role")
-            items.sort_values(by=['time'], ascending=False,inplace=True)
+            items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)             
         except:
@@ -47,9 +47,7 @@ class HttpRequest:
             items = pd.DataFrame(entries['items'])
             items.pop('id')
             items.pop("role")
-            items.sort_values(by=['time','date'], ascending=[False,False],inplace=True)
-            items.reset_index(drop=True, inplace=True)
-            items.columns = map(str.upper, items.columns)  
+ 
             return items
         except:
             # error_ui = Ui_ErrorWindow()

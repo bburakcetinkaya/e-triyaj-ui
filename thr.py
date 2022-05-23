@@ -21,8 +21,18 @@ class UpdateTableThread(threading.Thread):
     def run(self):
         while not self._stopped.wait(5):
             self._target()
-    def stop(self):
-        self._stopped = event.set()
+            
+class UpdateTimeThread(threading.Thread):
+    def __init__(self,target,event):
+        threading.Thread.__init__(self)
+        self._target = target
+        self._stopped = event
+
+    def run(self):
+        while not self._stopped.wait(60):
+            self._target()
+    # def stop(self):
+    #     self._stopped = event.set()
             
             # helper = Helper()
             # hr = HttpRequest()
