@@ -1,25 +1,15 @@
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from thr import *
-from MainWindow import *
-
-
-def main():
+from PyQt5 import QtWidgets
+import threading
+from MainManager import MainManager
+      
+if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    ui.updateTable()
-    thread = UpdateTableThread(ui.updateTable,stopFlag)
-    thread.start()
-    MainWindow.show()      
+    stopFlag = threading.Event()
+    window = MainManager(stopFlag)
+    window.show()      
     app.aboutToQuit.connect(stopFlag.set)
     
     
-    sys.exit(app.exec_())  
-        
-        
-        
-if __name__ == "__main__":
-    main()
+    sys.exit(app.exec_())

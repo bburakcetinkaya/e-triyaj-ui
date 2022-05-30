@@ -6,16 +6,15 @@ Created on Wed Apr 27 02:48:00 2022
 """
 
 import requests as rq
-from thr import *
 from PyQt5.QtWidgets import QMessageBox
 import pandas as pd
 from datetime import datetime
 import json
-import time
-
 url = "http://localhost:8000"
 
-class HttpRequest:
+class HttpRequest(object):
+    def __init__(self,stopFlag):
+        self.__stopFlag = stopFlag
 
     def getEntriesByTc(self,tc):
         try:            

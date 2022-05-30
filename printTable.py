@@ -4,7 +4,7 @@ Created on Wed Apr 27 03:14:55 2022
 
 @author: ASUS
 """
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore
 
 class PrintTable(QtCore.QAbstractTableModel):
     

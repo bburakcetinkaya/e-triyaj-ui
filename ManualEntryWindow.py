@@ -9,10 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from httpRequests import *
+# from httpRequests import *
 
 
-class Ui_manualEntryWindow(object):
+class Ui_ManualEntryWindow(object):
     def setupUi(self, manualEntryWindow):
         manualEntryWindow.setObjectName("manualEntryWindow")
         manualEntryWindow.resize(527, 563)
@@ -243,7 +243,7 @@ class Ui_manualEntryWindow(object):
         self.gridLayout_5 = QtWidgets.QGridLayout()
         self.gridLayout_5.setObjectName("gridLayout_5")
         self.manualEntryEnterButton = QtWidgets.QPushButton(self.widget1)
-        self.manualEntryEnterButton.clicked.connect(self.onEnterClicked)
+        
         self.manualEntryEnterButton.setStyleSheet("QPushButton {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -262,7 +262,7 @@ class Ui_manualEntryWindow(object):
         self.manualEntryEnterButton.setObjectName("manualEntryEnterButton")
         self.gridLayout_5.addWidget(self.manualEntryEnterButton, 0, 1, 1, 1)
         self.manualEntryDiscardButton = QtWidgets.QPushButton(self.widget1)
-        self.manualEntryDiscardButton.clicked.connect(self.onDiscardClicked)
+        
         self.manualEntryDiscardButton.setStyleSheet("QPushButton {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -307,46 +307,4 @@ class Ui_manualEntryWindow(object):
         self.temperatureLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Temperature:</span></p></body></html>"))
         self.manualEntryEnterButton.setText(_translate("manualEntryWindow", "Enter"))
         self.manualEntryDiscardButton.setText(_translate("manualEntryWindow", "Discard"))
-    def closing(self,flag=False):
-        return flag
-    def onEnterClicked(self):
-        
-        name = self.nameEdit.text()
-        surname = self.surnameEdit.text()
-        age = self.ageEdit.text()
-        genderIndex = self.genderComboBox.currentIndex()
-        # 0 DEĞERİ DEĞİŞTİRİLECEK
-        if genderIndex == 0:
-            gender = "MALE"
-        if genderIndex == 1:
-            gender = "MALE"
-        if genderIndex == 2:
-            gender = "FEMALE"
-            
-       
-        tc = self.tcEdit.text()
-        sp02 = self.spO2Edit.text()
-        heartRate = self.heartRateEdit.text()
-        temperature = self.temperatureEdit.text()
-        systolicBP = self.systolicBpEdit.text()
-        diastolicBp = self.diastolicBpEdit.text()
-        
-        
-        hr = HttpRequest()
-        hr.postEntry(name,surname,age,gender,tc,sp02,heartRate,
-                            temperature,systolicBP,diastolicBp)
-        
-        
-        self.closing(True)
-        # QtCore.QCoreApplication.instance().quit()
-    def onDiscardClicked(self):
-        self.nameEdit.clear()
-        self.surnameEdit.clear()
-        self.ageEdit.clear()
-        self.genderComboBox.setCurrentIndex(0)
-        self.tcEdit.clear()
-        self.heartRateEdit.clear()
-        self.spO2Edit.clear()
-        self.temperatureEdit.clear()
-        self.systolicBpEdit.clear()
-        self.diastolicBpEdit.clear()
+    
