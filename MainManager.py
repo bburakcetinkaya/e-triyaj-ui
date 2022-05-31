@@ -16,16 +16,16 @@ from thr import UpdateTableThread,UpdateTimeThread
 import pandas as pd
 
 class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
-    def __init__(self,stopFlag,parent=None):
+    def __init__(self,parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.connectSignalsSlots()
         self.dataHolder = pd.DataFrame({})
-        self.updateTable()
-        self.__tableThread = UpdateTableThread(self.updateTable,stopFlag)
-        self.__tableThread.start()
-        self.__timeThread = UpdateTimeThread(self.updateTime,stopFlag)
-        self.__timeThread.start()
+        # self.updateTable()
+        # self.__tableThread = UpdateTableThread(self.updateTable,stopFlag)
+        # self.__tableThread.start()
+        # self.__timeThread = UpdateTimeThread(self.updateTime,stopFlag)
+        # self.__timeThread.start()
         
         self.entryUi = ManualEntryManager()
         

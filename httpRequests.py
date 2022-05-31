@@ -13,8 +13,13 @@ import json
 url = "http://localhost:8000"
 
 class HttpRequest(object):
-    def __init__(self,stopFlag):
-        self.__stopFlag = stopFlag
+    def __init__(self):
+        # self.__stopFlag = stopFlag
+        print()
+
+    def requestLogin(self,name,password):#"http://localhost:8000/users/requestLogin/name/admin/password/password)
+        x = rq.get(url + '/users/requestLogin/name/'+str(name)+'/password/'+str(password))
+        return x
 
     def getEntriesByTc(self,tc):
         try:            
@@ -58,7 +63,7 @@ class HttpRequest(object):
             msg.setText("Fail")
             msg.setInformativeText('Failed to find records.')
             msg.setWindowTitle("Fail")
-            stopFlag.set()
+            # stopFlag.set()
             msg.exec_()            
             print("could not send request")
             items = pd.DataFrame(emptyDict)
@@ -170,8 +175,8 @@ class HttpRequest(object):
             msg.setInformativeText('Patient record entered successfully.')
             msg.setWindowTitle("Success")
             msg.exec_()
-        finally:
-            stopFlag.clear()
+        # finally:
+            # stopFlag.clear()
 
         
             
