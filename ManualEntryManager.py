@@ -40,10 +40,14 @@ class ManualEntryManager(QtWidgets.QMainWindow,Ui_manualEntryWindow):
         systolicBP = self.systolicBpEdit.text()
         diastolicBp = self.diastolicBpEdit.text()
         
+        if self.onlyMyDoctor_comboBox.currentIndex() == 1:
+            onlyMyDoctor = "TRUE"
+        if self.onlyMyDoctor_comboBox.currentIndex() == 2:
+            onlyMyDoctor = "FALSE"
+        
         hr = HttpRequest()
         hr.postEntry(name,surname,age,gender,tc,sp02,heartRate,
-                            temperature,systolicBP,diastolicBp)
-        
+                            temperature,systolicBP,diastolicBp,onlyMyDoctor)        
         
         self.close()
 

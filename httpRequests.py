@@ -14,84 +14,83 @@ url = "http://localhost:8000"
 
 class HttpRequest(object):
     def __init__(self):
-        # self.__stopFlag = stopFlag
+
         print()
 
-    def requestLogin(self,name,password):#"http://localhost:8000/users/requestLogin/name/admin/password/password)
+    def requestLogin(self,name,password):
         x = rq.get(url + '/users/requestLogin/tc/'+str(name)+'/password/'+str(password))
         return x
 
-    def getEntriesByTc(self,tc):
+    def getEntriesByTc(self,tc,doctorID,role):
+        print(tc)
         try:            
-            entries = rq.get(url + '/users/getUserRecordsByTc/'+str(tc)).json()
-            # print(entries.url)
+            entries = rq.get(url + '/users/getUserRecordsByTc/'+str(tc)).json()   
             items = pd.DataFrame(entries['items'])
-            items.pop('id')
-            items.pop("doctorID")
-            items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
-            items.reset_index(drop=True, inplace=True)
-            items.columns = map(str.upper, items.columns)             
         except:
-            # error_ui = Ui_ErrorWindow()
-            # error_ui.setErrorMessage('Could not find')
-            # error_ui.setupUi()
-            print("could not send request")
-            return "error"
-        else:
-            # print("errordu")
-            return items
+           print("could not send request")
+           emptyDict = {}
+           items = pd.DataFrame(emptyDict)
+           
+        else:            
+           print("OK")
+           if role == "ROLE_DOCTOR":
+                items = self.controlDataForDoctorOnly(items,doctorID)   
+           items.pop('id')
+           items.pop('doctorID')
+           items.pop('onlyMyDoctor')
+           items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
+           items.reset_index(drop=True, inplace=True)            
+           items.columns = map(str.upper, items.columns)  
+        finally:
+           return items
         # finally:
             
         
-    def getEntriesByDateInterval(self,startDate,endDate):
-        emptyDict = {}#http://localhost:8000/users/startDate/2022-05-22/endDate/2022-06-01"
-        try:#http://192.168.1.103/users/startDate/2022-04-30/endDate/2022-04-30
+    def getEntriesByDateInterval(self,startDate,endDate,doctorID,role):
+
+        try:
             entries = rq.get(url +'/users/startDate/' + startDate +'/endDate/' +endDate).json()
+            items = pd.DataFrame(entries['items'])
         except:
-            # error_ui = Ui_ErrorWindow()
-            # error_ui.setErrorMessage('Could not update table')
-            # error_ui.setupUi()
-            # print(entries)
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Fail")
-            msg.setInformativeText('Failed to find records.')
-            msg.setWindowTitle("Fail")
-            # stopFlag.set()
-            msg.exec_()            
+            emptyDict = {}
             print("could not send request")
             items = pd.DataFrame(emptyDict)
-        else:
-            items = pd.DataFrame(entries['items'])
+            
+        else:            
+            print("OK")
+            if role == "ROLE_DOCTOR":
+                items = self.controlDataForDoctorOnly(items,doctorID)   
+            items.pop('id')
             items.pop('doctorID')
-            items.pop("id")
+            items.pop('onlyMyDoctor')
+            items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
+            items.reset_index(drop=True, inplace=True)            
+            items.columns = map(str.upper, items.columns)  
         finally:
             return items
             
-    def getEntriesByDateIntervalAndTc(self,startDate,endDate,tc):
+    def getEntriesByDateIntervalAndTc(self,startDate,endDate,tc,doctorID,role):
         
-        emptyDict = {}
-        try:#/users/tc/{tc}/startDate/{startDate}/endDate/{endDate}            
+
+        try:         
             entries = rq.get(url +'/users/tc/'+ tc+'/startDate/' + startDate +'/endDate/' + endDate).json()
             items = pd.DataFrame(entries['items'])
-            items.pop('id')
-            items.pop("doctorID")
-            items.sort_values(by=['time','date'], ascending=[False,False],inplace=True)
-            items.reset_index(drop=True, inplace=True)
-            items.columns = map(str.upper, items.columns)  
-            return items
+            
         except:
-            # error_ui = Ui_ErrorWindow()
-            # error_ui.setErrorMessage('Could not update table')
-            # error_ui.setupUi()
-            # print(entries)
+            emptyDict = {}
             print("could not send request")
             items = pd.DataFrame(emptyDict)
-            return items
+            
         else:
-            # print(entries)
             print("OK")
-            return items
+            if role == "ROLE_DOCTOR":
+                items = self.controlDataForDoctorOnly(items,doctorID)  
+            items.pop('id')
+            items.pop('doctorID')
+            items.pop('onlyMyDoctor')
+            items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
+            items.reset_index(drop=True, inplace=True)            
+            items.columns = map(str.upper, items.columns)   
         finally:
             return items
         
@@ -116,7 +115,7 @@ class HttpRequest(object):
     #         return items  
         
     def postEntry(self,name,surname,age,gender,tc,sp02,heartRate,
-                        temperature,systolicBP,diastolicBP):
+                        temperature,systolicBP,diastolicBP,onlyMyDoctor):
         self.postData = {
                           "id": 0,
                           "name": "string",
@@ -146,6 +145,7 @@ class HttpRequest(object):
         self.postData["temperature"] = float(temperature)
         self.postData["systolicBP"] = int(systolicBP)
         self.postData["diastolicBP"] = int(diastolicBP)
+        self.postData["onlyMyDoctor"] = str(onlyMyDoctor)
         self.postData["date"] = now.strftime("%Y-%m-%d")
         self.postData["time"] = now.strftime("%H.%M.%S")
         self.jsonPostData = json.dumps(self.postData)
@@ -173,7 +173,13 @@ class HttpRequest(object):
             # stopFlag.clear()
 
         
-            
+    def controlDataForDoctorOnly(self,data,doctorID):
+        for i in range(0,len(data)-1):            
+            controldata = data.loc[i]
+            if (controldata["onlyMyDoctor"] == "TRUE") and (controldata["doctorID"] != doctorID):
+                    data.drop([i],axis=0,inplace=True)     
+        data.reset_index(drop=True, inplace=True)
+        return data
             
         
   

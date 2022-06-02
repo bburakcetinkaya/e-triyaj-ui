@@ -15,15 +15,20 @@ import Helper
 from PyQt5 import QtCore,QtWidgets
 from thr import UpdateTableThread,UpdateTimeThread
 import pandas as pd
+import threading
 
 class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
-    def __init__(self,name,surname,tc,parent=None):
+    def __init__(self,role,name,surname,tc,parent=None):
         super().__init__(parent)
+        self.stopFlag = threading.Event()
+        self.stopFlag.clear()
         self.setupUi(self)
         self.connectSignalsSlots()
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.showFullScreen()
         self.__tc = tc
+        self.__role = role
+        self.tableThread = UpdateTableThread(self.updateTable,self.stopFlag) 
         # self.__name = name
         # self.__surname = surname
         self.nameSurname_label.setText(name+" "+surname)
@@ -101,7 +106,7 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
         hr = HttpRequest()
         data = pd.DataFrame({})
         # dayToBegin = helper.getPreviousNthDay(cnt+1)
-        data = hr.getEntriesByDateInterval(dayToBegin,today)
+        data = hr.getEntriesByDateInterval(dayToBegin,today,self.__tc,self.__role)
         # print(data)
         if data.empty:
             msg = QMessageBox()
@@ -114,26 +119,27 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
             return
         if data.equals(self.dataHolder):
             return
-        else:
-            # print(dataHolder)
+        else:         
             self.dataHolder = pd.concat([data,self.dataHolder]).drop_duplicates().reset_index(drop=True)
-            data.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
-            data.reset_index(drop=True, inplace=True)
-            data.columns = map(str.upper, data.columns) 
+            # data.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
+            # data.reset_index(drop=True, inplace=True)
+            # data.columns = map(str.upper, data.columns) 
             toPrint = PrintTable(data)
             self.tableView.setModel(toPrint)
-             
+            
+
+        
     def openManualEntryWindow(self): 
         self.entryUi = ManualEntryManager()
         self.entryUi.show()       
         
     def openGraphWindow(self,signal):        
              
-        self._tc = signal.sibling(signal.row(),4).data()  
-        self.graphUi = GraphManager(self._tc) 
+        self.__tc = signal.sibling(signal.row(),4).data()  
+        self.graphUi = GraphManager(self.__tc,self.__tc,self.__role) 
         # self.graphUi.updateInformation()
         # self.graphUi.setTc()
         # self.graphUi.updateInformation()
-        # self.graphUi.updateInformation(self._tc)
+        # self.graphUi.updateInformation(self.__tc)
         self.graphUi.show()        
         # GraphWindow.exec_()

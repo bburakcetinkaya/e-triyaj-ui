@@ -7,7 +7,7 @@ Created on Tue May 31 02:46:21 2022
 
 from LoginWindow import Ui_LoginWindow
 from WaitingLabel import WaitingLabel
-from MainManager import MainManager
+import MainManager
 from GraphManager import GraphManager
 from httpRequests import HttpRequest
 from PyQt5 import QtWidgets,QtGui,QtCore
@@ -31,7 +31,7 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
         self.B = 255
         self.alpha = 40
         self.clickFlag = True
-        # self.enterClicked = QtGui.QKeyEvent().key(0x01000004)
+
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.password_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordNewUser_lineEdit.setEchoMode((QtWidgets.QLineEdit.Password))
@@ -43,10 +43,6 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
         self.pushButton.clicked.connect(self.requestLogin)
         self.signUp_Button.clicked.connect(lambda: {self.stackedWidget.setCurrentIndex(1)})
         self.exitButton_newUser.clicked.connect(lambda: {self.stackedWidget.setCurrentIndex(0)})
-#         self.sizegrip = QtWidgets.QSizeGrip(Ui_LoginWindow)
-# 		self.gridLayout.addWidget(self.sizegrip,1,0,QtCore.Qt.AlignBottom|QtCore.Qt.AlignRight)
-# 		flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
-# 		Ui_LoginWindow.setWindowFlags(flags)
 
     
    
@@ -69,6 +65,10 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
             self.requestLogin()
     def logoColorChange(self):
         
+
+        
+        self.label_2.setStyleSheet("QLabel { color : rgb(%s,120,%s,%s); }" % (str(self.R),str(self.B),str(self.alpha)));
+
         if self.colorFlag:
             self.R+=1
             self.alpha +=1
@@ -77,26 +77,18 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
             self.R-=1
             self.B+=1
             self.alpha -=1
-        
-        self.label_2.setStyleSheet("QLabel { color : rgb(%s,120,%s,%s); }" % (str(self.R),str(self.B),str(self.alpha)));
-        # self.heartLogo.fill(QtCore.Qt.black)
-        # print(self.G," ",self.B)
+            
         if self.R == 255:
             self.colorFlag = False
         if self.R == 120:
             self.colorFlag = True
-            
-        # if self.B == 0:
-        #     self.colorFlag = False
-        # if self.B == 255:
-        #     self.colorFlag = True
+
         
         
     def requestLogin(self):
        
         self.clickFlag = False
         self.pushButton.setEnabled(False)
-        # self.pushButton.setC
         self.blockSignals(True)
 
         
@@ -114,35 +106,33 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
             return
         else:
             data = response.json()
-        
-        # data = pd.DataFrame(self.__response)
-        print(data)
-        # print(self.__response.raw)
-        
-        # self.__response.status_code
+   
         if response.status_code == 200:
             self.__waitingLabel.show()
             self.label.setText("Welcome")
             name = data["name"]
             surname = data["surname"]
             tc = data["tc"]
-            if data["role"] == "ROLE_ADMIN":
+            role = data["role"]
+            
+            if role == "ROLE_ADMIN":
                 
                 self.close()
                 time.sleep(1)
-                self.newWindow = MainManager(name,surname,tc)
+                self.newWindow = MainManager.MainManager(role,name,surname,tc)
                 self.newWindow.show()
-            if data["role"] == "ROLE_DOCTOR":
+            if role == "ROLE_DOCTOR":
                 
                 self.close()
                 time.sleep(1)
-                self.newWindow = MainManager(name,surname,tc)
+                print(role," ",name," ",surname," ",tc)
+                self.newWindow = MainManager.MainManager(role,name,surname,tc)
                 self.newWindow.show()
-            if data["role"] == "ROLE_PATIENT":
+            if role == "ROLE_PATIENT":
                 
                 self.close()
                 time.sleep(1)
-                self.newWindow = GraphManager(data["tc"])
+                self.newWindow = GraphManager(tc,tc)
                 # self.graphUi.updateInformation()
                 self.newWindow.show()
         elif response.status_code == 404:

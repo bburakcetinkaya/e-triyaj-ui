@@ -8,7 +8,7 @@ from PyQt5 import QtWidgets,QtCore,QtGui
 
 from GraphWindow import Ui_GraphWindow
 import LoginManager
-from ManualEntryWindow import Ui_manualEntryWindow
+from ManualEntryManager import ManualEntryManager
 
 from Helper import Helper
 from printTable import PrintTable
@@ -25,14 +25,15 @@ import time
 dataHolderPatient = pd.DataFrame({})
 
 class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
-    def __init__(self,tc=None,parent=None):
+    def __init__(self,doctorID,tc,role="ROLE_ADMIN",parent=None):
         super().__init__(parent)
         
         self.setupUi(self)
         self.connectSignalsSlots()
-        # self.setCentralWidget(self)
         self.scene = QtWidgets.QGraphicsScene(self) 
         self.__tc = tc
+        self.__role = role
+        self.__doctorID = doctorID
         self.updateInformation()
         
         
@@ -53,10 +54,9 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
     def getTc(self):
         return self.__tc
     def onManualEntry(self):
-        # global manualEntryWindow
-        self.manualEntryWindow = QtWidgets.QMainWindow()
-        self.ui = Ui_manualEntryWindow()
-        self.ui.setupUi(self.manualEntryWindow)
+        
+        
+        self.ui = ManualEntryManager()
         self.ui.ageEdit.setText(self.ageEdit.text())
         self.ui.ageEdit.setReadOnly(True)
         self.ui.nameEdit.setText(self.nameEdit.text())
@@ -72,20 +72,24 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.ui.genderComboBox.setCurrentIndex(2)
         self.ui.genderComboBox.setEnabled(False)
 
-        self.manualEntryWindow.show()
+        self.ui.show()
         # if self.ui.closing():
         # self.manualEntryWindow.close()
         # self.manualEntryWindow.closeEvent(self.updateInformation(self.tcEdit.text()))
         
     def printTable(self,data):
-
+        data.pop("NAME")
+        data.pop("TC")
+        data.pop("SURNAME")
+        data.pop("GENDER")
+        data.pop("AGE")
+        
         toPrint = PrintTable(data)
         self.tableView.setModel(toPrint)
         
     
     def updateInformationByDate(self):
         global dataHolderPatient
-        tc = self.__tc
         self.endDateEdit.setMinimumDate(self.startDateEdit.date())
         self.startDateEdit.setMaximumDate(self.endDateEdit.date())
         self.endDateEdit.setMaximumDate(datetime.today())
@@ -93,7 +97,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
         endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
         hr = HttpRequest()
-        df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc)
+        df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc,self.__doctorID,self.__role)
         
         if df.empty:
             msg = QMessageBox()
@@ -115,8 +119,9 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         
     def updateInformation(self):
         hr = HttpRequest()        
-        tc = self.getTc()        
-        df = hr.getEntriesByTc(tc)   
+        tc = self.__tc    
+        print("update info tc :" ,tc)
+        df = hr.getEntriesByTc(tc,self.__doctorID,self.__role)   
         self.printGraph(df)
         self.printTable(df)
         # a = QtGui.QResizeEvent(QtGui.QResizeEvent.size(),QtGui.QResizeEvent.oldSize())
@@ -131,7 +136,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         
     def printGraph(self,df):
         
-        
+        print(df)
         self.nameEdit.setText(str(df.at[0,"NAME"]))
         self.surnameEdit.setText(str(df.at[0,"SURNAME"]))
         self.tcEdit.setText(str(df.at[0,"TC"]))
@@ -184,20 +189,13 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
    
         
         
-        
-        # self.scene.size(self.graphicsView.size)
+
         self.scene.addWidget(self.plotWdgt)
-        # self.scene.setSceneRect(0,0,self.graphicsView.width(),self.graphicsView.height())
-        # self.graphicsView
-        # self.graphicsView.ce
+
         self.graphicsView.setScene(self.scene)  
-        # self.resizeEvent2()
-        # self.graphicsView.scale(self.graphicsView.width() / self.scene.width(), self.graphicsView.height() / self.scene.height())
-        # self.scene.setSceneRect(self.graphicsView.sceneRect())
-        # print(self.scene.sceneRect())
+  
+        # time.sleep(0.1)
         # self.graphicsView.fitInView(0,0,self.scene.width(),self.scene.height())
-        time.sleep(0.1)
-        self.graphicsView.fitInView(0,0,self.scene.width(),self.scene.height())
         
         # self.initialSolution_figure = plt.figure()
         # self.initialSolution_canvas = FigureCanvas(self.initialSolution_figure)
