@@ -15,7 +15,7 @@ class Ui_LoginWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
-        MainWindow.resize(986, 833)
+        MainWindow.resize(900, 700)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -53,8 +53,9 @@ class Ui_LoginWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.label_2 = QtWidgets.QLabel(self.loginPage)
-        self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("logo/loginLogo_2.png"))
+        self.label_2.setText("\u2766")
+        self.label_2.setFont(QtGui.QFont("Arial",75))
+        # self.label_2.setPixmap(QtGui.QPixmap("logo/loginLogo_2.png"))
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
@@ -175,7 +176,7 @@ class Ui_LoginWindow(object):
         self.exitButton = QtWidgets.QPushButton(self.loginPage)
         self.exitButton.setStyleSheet("#exitButton\n"
 "{\n"
-"    background-color:  rgb(0,0,255,10);\n"
+"    background-color:  rgb(255,255,255,50);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
 "    border-radius: 10px;\n"
@@ -191,7 +192,7 @@ class Ui_LoginWindow(object):
 "}")
         self.exitButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon1.addPixmap(QtGui.QPixmap("logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.exitButton.setIcon(icon1)
         self.exitButton.setObjectName("exitButton")
         self.horizontalLayout_4.addWidget(self.exitButton)
@@ -232,6 +233,39 @@ class Ui_LoginWindow(object):
         self.status_label.setAlignment(QtCore.Qt.AlignCenter)
         self.status_label.setObjectName("status_label")
         self.verticalLayout_4.addWidget(self.status_label)
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
+        self.name_lineEdit_2 = QtWidgets.QLineEdit(self.newUserPage)
+        self.name_lineEdit_2.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.name_lineEdit_2.setText("")
+        self.name_lineEdit_2.setObjectName("name_lineEdit_2")
+        self.horizontalLayout_7.addWidget(self.name_lineEdit_2)
+        self.name_lineEdit_3 = QtWidgets.QLineEdit(self.newUserPage)
+        self.name_lineEdit_3.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.name_lineEdit_3.setText("")
+        self.name_lineEdit_3.setObjectName("name_lineEdit_3")
+        self.horizontalLayout_7.addWidget(self.name_lineEdit_3)
+        self.verticalLayout_4.addLayout(self.horizontalLayout_7)
         self.name_lineEdit = QtWidgets.QLineEdit(self.newUserPage)
         self.name_lineEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
@@ -314,7 +348,7 @@ class Ui_LoginWindow(object):
         spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem13)
         self.exitButton_newUser = QtWidgets.QPushButton(self.newUserPage)
-        self.exitButton_newUser.setStyleSheet("#exitButton\n"
+        self.exitButton_newUser.setStyleSheet("#exitButton_newUser\n"
 "{\n"
 "    background-color:  rgb(0,0,255,10);\n"
 "    border-style: outset;\n"
@@ -331,7 +365,9 @@ class Ui_LoginWindow(object):
 "    border-style: inset;\n"
 "}")
         self.exitButton_newUser.setText("")
-        self.exitButton_newUser.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("logo/left_arrow.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.exitButton_newUser.setIcon(icon2)
         self.exitButton_newUser.setObjectName("exitButton_newUser")
         self.horizontalLayout_6.addWidget(self.exitButton_newUser)
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
@@ -356,7 +392,9 @@ class Ui_LoginWindow(object):
         self.signUp_Button.setText(_translate("MainWindow", "Sign up"))
         self.pushButton.setText(_translate("MainWindow", "Login"))
         self.status_label.setText(_translate("MainWindow", "Welcome to E-Triage"))
-        self.name_lineEdit.setPlaceholderText(_translate("MainWindow", "Please enter your user name."))
-        self.passwordNewUser_lineEdit.setPlaceholderText(_translate("MainWindow", "Please enter your password."))
-        self.passwordNewUser_lineEdit2.setPlaceholderText(_translate("MainWindow", "Please enter your password again."))
+        self.name_lineEdit_2.setPlaceholderText(_translate("MainWindow", "Name:"))
+        self.name_lineEdit_3.setPlaceholderText(_translate("MainWindow", "Surname"))
+        self.name_lineEdit.setPlaceholderText(_translate("MainWindow", "TC number:"))
+        self.passwordNewUser_lineEdit.setPlaceholderText(_translate("MainWindow", "Password"))
+        self.passwordNewUser_lineEdit2.setPlaceholderText(_translate("MainWindow", "Password again"))
         self.signUp_button.setText(_translate("MainWindow", "Sign up"))

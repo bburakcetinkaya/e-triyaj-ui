@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>986</width>
-    <height>833</height>
+    <width>822</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -322,7 +322,7 @@ QPushButton:pressed {
               <property name="styleSheet">
                <string notr="true">#exitButton
 {
-    background-color:  rgb(0,0,255,10);
+    background-color:  rgb(255,255,255,50);
     border-style: outset;
     border-width: 2px;
     border-radius: 10px;
@@ -342,8 +342,7 @@ QPushButton:pressed
               </property>
               <property name="icon">
                <iconset>
-                <normalon>../logo/power-off.png</normalon>
-               </iconset>
+                <normaloff>../logo/power-off.png</normaloff>../logo/power-off.png</iconset>
               </property>
              </widget>
             </item>
@@ -414,6 +413,56 @@ QPushButton:pressed
                </widget>
               </item>
               <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QLineEdit" name="name_lineEdit_2">
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Name:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="name_lineEdit_3">
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Surname</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
                <widget class="QLineEdit" name="name_lineEdit">
                 <property name="styleSheet">
                  <string notr="true">QLineEdit {
@@ -432,7 +481,7 @@ QPushButton:pressed
                  <string/>
                 </property>
                 <property name="placeholderText">
-                 <string>Please enter your user name.</string>
+                 <string>TC number:</string>
                 </property>
                </widget>
               </item>
@@ -452,7 +501,7 @@ QPushButton:pressed
 }</string>
                 </property>
                 <property name="placeholderText">
-                 <string>Please enter your password.</string>
+                 <string>Password</string>
                 </property>
                </widget>
               </item>
@@ -472,7 +521,7 @@ QPushButton:pressed
 }</string>
                 </property>
                 <property name="placeholderText">
-                 <string>Please enter your password again.</string>
+                 <string>Password again</string>
                 </property>
                </widget>
               </item>
@@ -578,7 +627,7 @@ QPushButton:pressed {
             <item>
              <widget class="QPushButton" name="exitButton_newUser">
               <property name="styleSheet">
-               <string notr="true">#exitButton
+               <string notr="true">#exitButton_newUser
 {
     background-color:  rgb(0,0,255,10);
     border-style: outset;
@@ -600,8 +649,7 @@ QPushButton:pressed
               </property>
               <property name="icon">
                <iconset>
-                <normalon>../logo/power-off.png</normalon>
-               </iconset>
+                <normaloff>../logo/left_arrow.png</normaloff>../logo/left_arrow.png</iconset>
               </property>
              </widget>
             </item>

@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>563</height>
+    <width>528</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>96</width>
     <height>0</height>
    </size>
   </property>
@@ -32,119 +32,193 @@
    <string>Manual Entry</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">#manualEntryWindow
+{
+
+background-image: url(:);
+background-repeat: no-repeat;
+background-position: center;
+
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    min-width: 5em;
+    padding: 6px;
+}</string>
   </property>
-  <widget class="Line" name="line">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>491</width>
-     <height>16</height>
+     <x>11</x>
+     <y>11</y>
+     <width>505</width>
+     <height>579</height>
     </rect>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="midLineWidth">
-    <number>1</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>12</y>
-     <width>503</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>../logo/e-triage_manual_entry_form.png</pixmap>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>70</y>
-     <width>491</width>
-     <height>435</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QLabel" name="nameLabel">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../logo/e-triage_manual_entry_form.png</pixmap>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="tcLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;T.C. No:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <item>
+     <widget class="Line" name="line">
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="midLineWidth">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="diastBPLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Diastolic Blood Pressure:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <item>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="labelAlignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="spo2Label">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;sp0&lt;/span&gt;&lt;span style=&quot; font-size:10pt; vertical-align:sub;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLabel" name="sysBPLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Systolic Blood Pressure:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="ageLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Age:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="genderLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Gender:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="heartRateLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Heart Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QComboBox" name="genderComboBox">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QComboBox{
+      <item row="0" column="0">
+       <widget class="QLabel" name="nameLabel">
+        <property name="styleSheet">
+         <string notr="true">QLabel 
+{
+	background-color: &quot;transparent&quot;
+}</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Name:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="nameEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="surnameLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Surname:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="surnameEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Surname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="tcLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;T.C. No:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="tcEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>TC number</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="ageLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Age:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="ageEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Age</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="genderLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Gender:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="genderComboBox">
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -164,250 +238,52 @@ QComboBox::down-arrow {
     width: 14px;
     height: 14px;
 }</string>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>16</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="frame">
-       <bool>false</bool>
-      </property>
-      <item>
-       <property name="text">
-        <string>Select</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>MALE</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>../logo/male_gender.png</normaloff>../logo/male_gender.png</iconset>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>FEMALE</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>../logo/female_gender.png</normaloff>../logo/female_gender.png</iconset>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="surnameLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Surname:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="temperatureLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Temperature:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="nameEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="surnameEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="tcEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="ageEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="heartRateEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLineEdit" name="spO2Edit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLineEdit" name="temperatureEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="diastolicBpEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLineEdit" name="systolicBpEdit">
-      <property name="styleSheet">
-       <string notr="true">QLineEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>12</x>
-     <y>512</y>
-     <width>491</width>
-     <height>39</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="1">
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="1">
-       <widget class="QPushButton" name="manualEntryEnterButton">
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}
-QPushButton:pressed {
-    background-color: rgb(0, 0, 150);
-    border-style: inset;
-}</string>
         </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MALE</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../logo/male_gender.png</normaloff>../logo/male_gender.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>FEMALE</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../logo/female_gender.png</normaloff>../logo/female_gender.png</iconset>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="heartRateLabel">
         <property name="text">
-         <string>Enter</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Heart Rate:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="manualEntryDiscardButton">
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="heartRateEdit">
         <property name="styleSheet">
-         <string notr="true">QPushButton {
+         <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -417,31 +293,298 @@ QPushButton:pressed {
 	color: black;
     min-width: 5em;
     padding: 6px;
-}
-QPushButton:pressed {
-    background-color: rgb(0, 0, 150);
-    border-style: inset;
 }</string>
         </property>
-        <property name="text">
-         <string>Discard</string>
+        <property name="placeholderText">
+         <string>Heart Rate</string>
         </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="spo2Label">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;sp0&lt;/span&gt;&lt;span style=&quot; font-size:10pt; vertical-align:sub;&quot;&gt;2&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="spO2Edit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Oxigen Saturation in blood</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="temperatureLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Temperature:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="temperatureEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Body Temperature</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="diastBPLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Diastolic Blood Pressure:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="diastolicBpEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Diastolic Blood Pressure</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="sysBPLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Systolic Blood Pressure:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLineEdit" name="systolicBpEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Systolic Blood Pressure</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="onlyMyDoctor_label">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Who can see?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="onlyMyDoctor_comboBox">
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: grey;
+    min-width: 10em;
+    padding: 6px;
+}
+QComboBox::drop-down 
+{
+    border: 0px; /* This seems to replace the whole arrow of the combo box */
+}
+QComboBox::down-arrow {
+    image: url(../logo/down_arrow.png);
+    width: 14px;
+    height: 14px;
+}</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Only my doctor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Every doctor</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
     </item>
-    <item row="0" column="0">
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>13</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>13</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="manualEntryDiscardButton">
+        <property name="toolTip">
+         <string>Discard</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#manualEntryDiscardButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../logo/discard.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="manualEntryEnterButton">
+        <property name="toolTip">
+         <string>Enter</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#manualEntryEnterButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../logo/green_tick.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exitButton">
+        <property name="toolTip">
+         <string>Exit</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#exitButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normalon>../logo/power-off.png</normalon>
+         </iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

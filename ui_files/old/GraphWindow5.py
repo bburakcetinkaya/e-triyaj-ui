@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GraphWindow.ui'
+# Form implementation generated from reading ui file 'graphWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -11,34 +11,66 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
+
 class Ui_GraphWindow(object):
     def setupUi(self, GraphWindow):
+        calendarWidgetStart = QtWidgets.QCalendarWidget()
+        calendarWidgetStart.setStyleSheet(
+                            # "QCalendarWidget QMenu  { alternate-background-color: rgb(128, 128, 128); }"
+                            "QCalendarWidget QToolButton"
+                            "{\n"
+                            "color:black;\n"
+                            "}\n"
+                            # "QCalendarWidget QToolButton::hover\n"
+                            # "{\n"
+                            # "background-color : cyan;\n"
+                            # "}\n"
+                            # "QCalendarWidget QToolButton::pressed\n"
+                            # "{\n"
+                            # "background-color : blue;\n"
+                            # "}\n"
+                            )
+        calendarWidgetEnd = QtWidgets.QCalendarWidget()
+        calendarWidgetEnd.setStyleSheet(
+                            # "QCalendarWidget QMenu  { alternate-background-color: rgb(128, 128, 128); }"
+                            "QCalendarWidget QToolButton"
+                            "{\n"
+                            "color:black;\n"
+                            "}\n"
+                            # "QCalendarWidget QToolButton::hover\n"
+                            # "{\n"
+                            # "background-color : cyan;\n"
+                            # "}\n"
+                            # "QCalendarWidget QToolButton::pressed\n"
+                            # "{\n"
+                            # "background-color : blue;\n"
+                            # "}\n"
+                            )
+        # self._windowName = windowName
         GraphWindow.setObjectName("GraphWindow")
-        GraphWindow.resize(893, 600)
-        GraphWindow.setStyleSheet("#GraphWindow\n"
-"{\n"
-"background-image: url(:);\n"
-"background-repeat: no-repeat;\n"
-"background-position: center;\n"
-"\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
-"\n"
-"}")
-        self.centralwidget = QtWidgets.QWidget(GraphWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        GraphWindow.resize(1031, 631)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(GraphWindow.sizePolicy().hasHeightForWidth())
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        GraphWindow.setWindowIcon(icon)
+        GraphWindow.setSizePolicy(sizePolicy)
+        GraphWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.gridLayoutWidget = QtWidgets.QWidget(GraphWindow)
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(11, 11, 1011, 611))
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
+        self.gridLayout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.nameEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.nameLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.nameLabel.setObjectName("nameLabel")
+        self.horizontalLayout.addWidget(self.nameLabel)
+        self.nameEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.nameEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -53,7 +85,10 @@ class Ui_GraphWindow(object):
         self.nameEdit.setReadOnly(True)
         self.nameEdit.setObjectName("nameEdit")
         self.horizontalLayout.addWidget(self.nameEdit)
-        self.surnameEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.surnameLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.surnameLabel.setObjectName("surnameLabel")
+        self.horizontalLayout.addWidget(self.surnameLabel)
+        self.surnameEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.surnameEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -68,7 +103,10 @@ class Ui_GraphWindow(object):
         self.surnameEdit.setReadOnly(True)
         self.surnameEdit.setObjectName("surnameEdit")
         self.horizontalLayout.addWidget(self.surnameEdit)
-        self.tcEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.tcLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.tcLabel.setObjectName("tcLabel")
+        self.horizontalLayout.addWidget(self.tcLabel)
+        self.tcEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.tcEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -83,7 +121,10 @@ class Ui_GraphWindow(object):
         self.tcEdit.setReadOnly(True)
         self.tcEdit.setObjectName("tcEdit")
         self.horizontalLayout.addWidget(self.tcEdit)
-        self.ageEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.ageLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.ageLabel.setObjectName("ageLabel")
+        self.horizontalLayout.addWidget(self.ageLabel)
+        self.ageEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.ageEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -98,9 +139,10 @@ class Ui_GraphWindow(object):
         self.ageEdit.setReadOnly(True)
         self.ageEdit.setObjectName("ageEdit")
         self.horizontalLayout.addWidget(self.ageEdit)
-        self.genderDisplay = QtWidgets.QPushButton(self.centralwidget)
-        self.genderDisplay.setStyleSheet("#genderDisplay\n"
-"{\n"
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.manualEntryButton = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.manualEntryButton.setStyleSheet("QPushButton {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -108,73 +150,30 @@ class Ui_GraphWindow(object):
 "    border-color: rgb(0, 0, 120);\n"
 "    font: bold 14px;\n"
 "    color: black;\n"
+"    min-width: 10em;\n"
 "    padding: 6px;\n"
-"}")
-        self.genderDisplay.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../logo/male_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.genderDisplay.setIcon(icon)
-        self.genderDisplay.setObjectName("genderDisplay")
-        self.horizontalLayout.addWidget(self.genderDisplay)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.logout_button = QtWidgets.QPushButton(self.centralwidget)
-        self.logout_button.setStyleSheet("#logout_button\n"
-"{\n"
-"    background-color:  rgb(255,255,255,100);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120,50);\n"
-"    min-width: 1em;\n"
-"    padding: 6px;\n"
-"\n"
 "}\n"
-"QPushButton:pressed\n"
-" {\n"
+"QPushButton:pressed {\n"
 "    background-color: rgb(0, 0, 150);\n"
 "    border-style: inset;\n"
 "}")
-        self.logout_button.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../logo/log-out.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.logout_button.setIcon(icon1)
-        self.logout_button.setObjectName("logout_button")
-        self.horizontalLayout.addWidget(self.logout_button)
-        self.exitButton = QtWidgets.QPushButton(self.centralwidget)
-        self.exitButton.setStyleSheet("#exitButton\n"
-"{\n"
-"    background-color:  rgb(255,255,255,100);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120,50);\n"
-"    min-width: 1em;\n"
-"    padding: 6px;\n"
-"\n"
-"}\n"
-"QPushButton:pressed\n"
-" {\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    border-style: inset;\n"
-"}")
-        self.exitButton.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.exitButton.setIcon(icon2)
-        self.exitButton.setObjectName("exitButton")
-        self.horizontalLayout.addWidget(self.exitButton)
-        self.verticalLayout_2.addLayout(self.horizontalLayout)
-        self.line = QtWidgets.QFrame(self.centralwidget)
+        self.manualEntryButton.setObjectName("manualEntryButton")
+
+        self.horizontalLayout.addWidget(self.manualEntryButton)
+        self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+        self.line = QtWidgets.QFrame(self.gridLayoutWidget)
         self.line.setFrameShadow(QtWidgets.QFrame.Raised)
         self.line.setLineWidth(2)
         self.line.setMidLineWidth(1)
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setObjectName("line")
-        self.verticalLayout_2.addWidget(self.line)
+        self.gridLayout.addWidget(self.line, 1, 0, 1, 1)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.startDateEdit = QtWidgets.QDateEdit(self.centralwidget)
+        self.startDateLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.startDateLabel.setObjectName("startDateLabel")
+        self.horizontalLayout_2.addWidget(self.startDateLabel)
+        self.startDateEdit = QtWidgets.QDateEdit(self.gridLayoutWidget)
         self.startDateEdit.setStyleSheet("QDateEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -195,12 +194,16 @@ class Ui_GraphWindow(object):
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
-        self.startDateEdit.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.startDateEdit.setAccelerated(True)
         self.startDateEdit.setCalendarPopup(True)
         self.startDateEdit.setObjectName("startDateEdit")
+        self.startDateEdit.setDate(QtCore.QDate.currentDate())
+        self.startDateEdit.setCalendarWidget(calendarWidgetStart)
         self.horizontalLayout_2.addWidget(self.startDateEdit)
-        self.endDateEdit = QtWidgets.QDateEdit(self.centralwidget)
+        self.editDateLabel = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.editDateLabel.setObjectName("editDateLabel")
+        self.horizontalLayout_2.addWidget(self.editDateLabel)
+        self.endDateEdit = QtWidgets.QDateEdit(self.gridLayoutWidget)
         self.endDateEdit.setStyleSheet("QDateEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -221,68 +224,17 @@ class Ui_GraphWindow(object):
 "    width: 14px;\n"
 "    height: 14px;\n"
 "}")
-        self.endDateEdit.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.endDateEdit.setAccelerated(True)
         self.endDateEdit.setCalendarPopup(True)
         self.endDateEdit.setObjectName("endDateEdit")
+        self.endDateEdit.setDate(QtCore.QDate.currentDate())
+        self.endDateEdit.setCalendarWidget(calendarWidgetEnd)
         self.horizontalLayout_2.addWidget(self.endDateEdit)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
-        self.manualEntryButton = QtWidgets.QPushButton(self.centralwidget)
-        self.manualEntryButton.setStyleSheet("QPushButton {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 10em;\n"
-"    padding: 6px;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    border-style: inset;\n"
-"}")
-        self.manualEntryButton.setObjectName("manualEntryButton")
-        self.horizontalLayout_2.addWidget(self.manualEntryButton)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setStyleSheet("QTabWidget::pane {\n"
-"\n"
-"  border-color: rgb(0, 0, 120);\n"
-"    border-width: 2px;\n"
-"    border-radius: 5px;\n"
-"  top:-4px; \n"
-"bottom:-4px;\n"
-"  background-color:  rgb(255,255,255);\n"
-"} \n"
-"\n"
-"QTabBar::tab {\n"
-"  background-color:  rgb(255,255,255,50);\n"
-"  border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 5px;\n"
-"  border-color: rgb(0, 0, 120);\n"
-"  margin-bottom: -3px; \n"
-"    margin-top: 2px;\n"
-"  padding: 6px;\n"
-"} \n"
-"\n"
-"QTabBar::tab:selected { \n"
-"  background-color:  rgb(50,50,250,50);\n"
-"    border-width: 2px;\n"
-"    border-radius: 5px;\n"
-"    margin-bottom: -3px; \n"
-"    font-size:15\n"
-"\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 2, 0, 1, 1)
+        self.tabWidget = QtWidgets.QTabWidget(self.gridLayoutWidget)
+        self.tabWidget.setStyleSheet("")
         self.tabWidget.setDocumentMode(False)
         self.tabWidget.setObjectName("tabWidget")
         self.graphTab = QtWidgets.QWidget()
@@ -342,10 +294,6 @@ class Ui_GraphWindow(object):
 "                          subcontrol-position: top;\n"
 "                            subcontrol-origin: margin;\n"
 "                        }")
-        self.graphicsView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.graphicsView.setRenderHints(QtGui.QPainter.HighQualityAntialiasing|QtGui.QPainter.SmoothPixmapTransform)
-        self.graphicsView.setResizeAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
-        self.graphicsView.setViewportUpdateMode(QtWidgets.QGraphicsView.FullViewportUpdate)
         self.graphicsView.setObjectName("graphicsView")
         self.gridLayout_3.addWidget(self.graphicsView, 0, 0, 1, 1)
         self.gridLayout_6.addLayout(self.gridLayout_3, 0, 0, 1, 1)
@@ -357,7 +305,7 @@ class Ui_GraphWindow(object):
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.tableView = QtWidgets.QTableView(self.tableTab)
-        self.tableView.setStyleSheet("QScrollBar::vertical {           \n"
+        self.tableView.setStyleSheet("QScrollBar:vertical {           \n"
 "                            border: 1px solid #999999;\n"
 "                           background:white;\n"
 "                            width:10px;    \n"
@@ -382,7 +330,7 @@ class Ui_GraphWindow(object):
 "                          subcontrol-position: top;\n"
 "                            subcontrol-origin: margin;\n"
 "                        }\n"
-"QScrollBar::horizontal {           \n"
+"QScrollBar:horizontal {           \n"
 "                            border: 1px solid #999999;\n"
 "                           background:white;\n"
 "                            width:10px;    \n"
@@ -409,35 +357,36 @@ class Ui_GraphWindow(object):
 "                        }")
         self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow)
-        self.tableView.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
-        self.tableView.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
-        self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName("tableView")
         self.gridLayout_4.addWidget(self.tableView, 0, 0, 1, 1)
         self.gridLayout_5.addLayout(self.gridLayout_4, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tableTab, "")
-        self.verticalLayout_2.addWidget(self.tabWidget)
-        self.gridLayout.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
-        GraphWindow.setCentralWidget(self.centralwidget)
+        self.gridLayout.addWidget(self.tabWidget, 3, 0, 1, 1)
+        self.gridLayout.setRowStretch(0, 1)
+        self.gridLayout.setRowStretch(1, 1)
+        self.gridLayout.setRowStretch(2, 1)
+        self.gridLayout.setRowStretch(3, 50)
 
         self.retranslateUi(GraphWindow)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(GraphWindow)
+        
+
+
 
     def retranslateUi(self, GraphWindow):
         _translate = QtCore.QCoreApplication.translate
-        GraphWindow.setWindowTitle(_translate("GraphWindow", "E-Triyaj Personal"))
-        self.nameEdit.setToolTip(_translate("GraphWindow", "Name"))
-        self.surnameEdit.setToolTip(_translate("GraphWindow", "Surname"))
-        self.tcEdit.setToolTip(_translate("GraphWindow", "TC"))
-        self.ageEdit.setToolTip(_translate("GraphWindow", "Age"))
-        self.logout_button.setToolTip(_translate("GraphWindow", "Log Out"))
-        self.exitButton.setToolTip(_translate("GraphWindow", "Exit"))
-        self.startDateEdit.setToolTip(_translate("GraphWindow", "Start Date"))
-        self.startDateEdit.setDisplayFormat(_translate("GraphWindow", "dd/MM/yyyy"))
-        self.endDateEdit.setToolTip(_translate("GraphWindow", "End Date"))
-        self.endDateEdit.setDisplayFormat(_translate("GraphWindow", "d/M/yyyy"))
+        GraphWindow.setWindowTitle(_translate("GraphWindow", "GraphWindow"))
+        self.nameLabel.setText(_translate("GraphWindow", "Name:"))
+        self.surnameLabel.setText(_translate("GraphWindow", "Surname:"))
+        self.tcLabel.setText(_translate("GraphWindow", "T.C. No:"))
+        self.ageLabel.setText(_translate("GraphWindow", "Age:"))
         self.manualEntryButton.setText(_translate("GraphWindow", "Manual Entry"))
+        self.startDateLabel.setText(_translate("GraphWindow", "Start Date:"))
+        self.startDateEdit.setDisplayFormat(_translate("GraphWindow", "d/M/yyyy"))
+        self.editDateLabel.setText(_translate("GraphWindow", "End Date:"))
+        self.endDateEdit.setDisplayFormat(_translate("GraphWindow", "d/M/yyyy"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.graphTab), _translate("GraphWindow", "Graph"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tableTab), _translate("GraphWindow", "Table"))
+
+    

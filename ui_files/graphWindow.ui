@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GraphWindow</class>
- <widget class="QWidget" name="GraphWindow">
+ <widget class="QMainWindow" name="GraphWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1031</width>
-    <height>631</height>
+    <width>893</width>
+    <height>600</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="windowTitle">
-   <string>Analysis Window</string>
+   <string>E-Triyaj Personal</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">#GraphWindow
+{
+background-image: url(:);
+background-repeat: no-repeat;
+background-position: center;
+
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    min-width: 5em;
+    padding: 6px;
+
+}</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>11</y>
-     <width>1011</width>
-     <height>611</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,1,50">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMinimumSize</enum>
-    </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
       <item>
-       <widget class="QLabel" name="nameLabel">
-        <property name="text">
-         <string>Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="nameEdit">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLineEdit" name="nameEdit">
+          <property name="toolTip">
+           <string>Name</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -58,23 +55,19 @@
     min-width: 5em;
     padding: 6px;
 }</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="surnameLabel">
-        <property name="text">
-         <string>Surname:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="surnameEdit">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="surnameEdit">
+          <property name="toolTip">
+           <string>Surname</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -85,23 +78,19 @@
     min-width: 5em;
     padding: 6px;
 }</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="tcLabel">
-        <property name="text">
-         <string>T.C. No:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="tcEdit">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="tcEdit">
+          <property name="toolTip">
+           <string>TC</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -112,23 +101,19 @@
     min-width: 5em;
     padding: 6px;
 }</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="ageLabel">
-        <property name="text">
-         <string>Age:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="ageEdit">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit {
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="ageEdit">
+          <property name="toolTip">
+           <string>Age</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -139,29 +124,233 @@
     min-width: 5em;
     padding: 6px;
 }</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="genderDisplay">
+          <property name="styleSheet">
+           <string notr="true">#genderDisplay
+{
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    padding: 6px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../logo/male_gender.png</normaloff>../logo/male_gender.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="logout_button">
+          <property name="toolTip">
+           <string>Log Out</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#logout_button
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../logo/log-out.png</normaloff>../logo/log-out.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="exitButton">
+          <property name="toolTip">
+           <string>Exit</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#exitButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normalon>../logo/power-off.png</normalon>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <spacer name="horizontalSpacer_2">
+       <widget class="Line" name="line">
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <property name="lineWidth">
+         <number>2</number>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="manualEntryButton">
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QDateEdit" name="startDateEdit">
+          <property name="toolTip">
+           <string>Start Date</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QDateEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}
+QDateEdit::drop-down 
+{
+    border: 0px; /* This seems to replace the whole arrow of the combo box */
+}
+QDateEdit::down-arrow {
+    image: url(../logo/down_arrow.png);
+    width: 14px;
+    height: 14px;
+}</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
+          <property name="accelerated">
+           <bool>true</bool>
+          </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="endDateEdit">
+          <property name="toolTip">
+           <string>End Date</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QDateEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}
+QDateEdit::drop-down 
+{
+    border: 0px; /* This seems to replace the whole arrow of the combo box */
+}
+QDateEdit::down-arrow {
+    image: url(../logo/down_arrow.png);
+    width: 14px;
+    height: 14px;
+}</string>
+          </property>
+          <property name="locale">
+           <locale language="English" country="UnitedStates"/>
+          </property>
+          <property name="accelerated">
+           <bool>true</bool>
+          </property>
+          <property name="displayFormat">
+           <string>d/M/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="manualEntryButton">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -176,153 +365,72 @@ QPushButton:pressed {
     background-color: rgb(0, 0, 150);
     border-style: inset;
 }</string>
-        </property>
-        <property name="text">
-         <string>Manual Entry</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <widget class="Line" name="line">
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <property name="lineWidth">
-       <number>2</number>
-      </property>
-      <property name="midLineWidth">
-       <number>1</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="startDateLabel">
-        <property name="text">
-         <string>Start Date:</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>Manual Entry</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QDateEdit" name="startDateEdit">
+       <widget class="QTabWidget" name="tabWidget">
         <property name="styleSheet">
-         <string notr="true">QDateEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
+         <string notr="true">QTabWidget::pane {
+
+  border-color: rgb(0, 0, 120);
     border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
-}
-QDateEdit::drop-down 
-{
-    border: 0px; /* This seems to replace the whole arrow of the combo box */
-}
-QDateEdit::down-arrow {
-    image: url(../logo/down_arrow.png);
-    width: 14px;
-    height: 14px;
-}</string>
-        </property>
-        <property name="accelerated">
-         <bool>true</bool>
-        </property>
-        <property name="displayFormat">
-         <string>d/M/yyyy</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="editDateLabel">
-        <property name="text">
-         <string>End Date:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDateEdit" name="endDateEdit">
-        <property name="styleSheet">
-         <string notr="true">QDateEdit {
-    background-color:  rgb(255,255,255);
-    border-style: outset;
+    border-radius: 5px;
+  top:-4px; 
+bottom:-4px;
+  background-color:  rgb(255,255,255);
+} 
+
+QTabBar::tab {
+  background-color:  rgb(255,255,255,50);
+  border-style: outset;
     border-width: 2px;
-    border-radius: 10px;
-    border-color: rgb(0, 0, 120);
-    font: bold 14px;
-	color: black;
-    min-width: 5em;
-    padding: 6px;
+    border-radius: 5px;
+  border-color: rgb(0, 0, 120);
+  margin-bottom: -3px; 
+	margin-top: 2px;
+  padding: 6px;
+} 
+
+QTabBar::tab:selected { 
+  background-color:  rgb(50,50,250,50);
+    border-width: 2px;
+    border-radius: 5px;
+    margin-bottom: -3px; 
+	font-size:15
+
+
 }
-QDateEdit::drop-down 
-{
-    border: 0px; /* This seems to replace the whole arrow of the combo box */
-}
-QDateEdit::down-arrow {
-    image: url(../logo/down_arrow.png);
-    width: 14px;
-    height: 14px;
-}</string>
+
+
+
+</string>
         </property>
-        <property name="accelerated">
-         <bool>true</bool>
+        <property name="tabShape">
+         <enum>QTabWidget::Rounded</enum>
         </property>
-        <property name="displayFormat">
-         <string>d/M/yyyy</string>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
+        <property name="documentMode">
+         <bool>false</bool>
         </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="0">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="currentIndex">
-       <number>1</number>
-      </property>
-      <property name="documentMode">
-       <bool>false</bool>
-      </property>
-      <widget class="QWidget" name="graphTab">
-       <attribute name="title">
-        <string>Graph</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_3">
+        <widget class="QWidget" name="graphTab">
+         <attribute name="title">
+          <string>Graph</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
-           <widget class="QGraphicsView" name="graphicsView">
-            <property name="styleSheet">
-             <string notr="true">QScrollBar:vertical {           
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QGraphicsView" name="graphicsView">
+              <property name="styleSheet">
+               <string notr="true">QScrollBar:vertical {           
                             border: 1px solid #999999;
                            background:white;
                             width:10px;    
@@ -372,24 +480,36 @@ QScrollBar:horizontal {
                           subcontrol-position: top;
                             subcontrol-origin: margin;
                         }</string>
-            </property>
-           </widget>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="renderHints">
+               <set>QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform</set>
+              </property>
+              <property name="resizeAnchor">
+               <enum>QGraphicsView::AnchorUnderMouse</enum>
+              </property>
+              <property name="viewportUpdateMode">
+               <enum>QGraphicsView::FullViewportUpdate</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tableTab">
-       <attribute name="title">
-        <string>Table</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout_4">
+        </widget>
+        <widget class="QWidget" name="tableTab">
+         <attribute name="title">
+          <string>Table</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
-           <widget class="QTableView" name="tableView">
-            <property name="styleSheet">
-             <string notr="true">QScrollBar:vertical {           
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QTableView" name="tableView">
+              <property name="styleSheet">
+               <string notr="true">QScrollBar::vertical {           
                             border: 1px solid #999999;
                            background:white;
                             width:10px;    
@@ -414,7 +534,7 @@ QScrollBar:horizontal {
                           subcontrol-position: top;
                             subcontrol-origin: margin;
                         }
-QScrollBar:horizontal {           
+QScrollBar::horizontal {           
                             border: 1px solid #999999;
                            background:white;
                             width:10px;    
@@ -439,20 +559,34 @@ QScrollBar:horizontal {
                           subcontrol-position: top;
                             subcontrol-origin: margin;
                         }</string>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAsNeeded</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAsNeeded</enum>
-            </property>
-           </widget>
+              </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+              </property>
+              <property name="verticalScrollMode">
+               <enum>QAbstractItemView::ScrollPerPixel</enum>
+              </property>
+              <property name="horizontalScrollMode">
+               <enum>QAbstractItemView::ScrollPerPixel</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
-        </item>
-       </layout>
-      </widget>
-     </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

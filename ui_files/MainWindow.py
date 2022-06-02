@@ -14,22 +14,39 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1304, 700)
-        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
+        MainWindow.resize(1052, 527)
+        MainWindow.setMinimumSize(QtCore.QSize(96, 0))
         MainWindow.setMaximumSize(QtCore.QSize(16777215, 16777215))
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet("gridline-color: rgb(0, 0, 100);\n"
-"background-color: rgb(255, 255, 255);")
+        MainWindow.setStyleSheet("#MainWindow\n"
+"{\n"
+"\n"
+"background-image: url(:);\n"
+"background-repeat: no-repeat;\n"
+"background-position: center;\n"
+"\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setVerticalSpacing(7)
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_2.setStyleSheet("color: rgb(85, 85, 255);")
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.line_2.setLineWidth(2)
+        self.line_2.setMidLineWidth(1)
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setObjectName("line_2")
+        self.gridLayout.addWidget(self.line_2, 0, 0, 1, 1)
         self.headerHorizontalLayout = QtWidgets.QHBoxLayout()
         self.headerHorizontalLayout.setObjectName("headerHorizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(5, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -51,8 +68,15 @@ class Ui_MainWindow(object):
         self.headerHorizontalLayout.addWidget(self.eTriageLogo)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.headerHorizontalLayout.addItem(spacerItem1)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setObjectName("verticalLayout")
         self.dateTimeEdit = QtWidgets.QDateTimeEdit(self.centralwidget)
-        self.dateTimeEdit.setEnabled(True)
+        self.dateTimeEdit.setEnabled(False)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.dateTimeEdit.sizePolicy().hasHeightForWidth())
+        self.dateTimeEdit.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.dateTimeEdit.setFont(font)
@@ -60,12 +84,70 @@ class Ui_MainWindow(object):
         self.dateTimeEdit.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 255));\n"
 "color: rgb(0, 0, 0);")
         self.dateTimeEdit.setFrame(False)
+        self.dateTimeEdit.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.dateTimeEdit.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
         self.dateTimeEdit.setKeyboardTracking(False)
         self.dateTimeEdit.setObjectName("dateTimeEdit")
-        self.headerHorizontalLayout.addWidget(self.dateTimeEdit, 0, QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+        self.verticalLayout.addWidget(self.dateTimeEdit)
+        self.nameSurname_label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.nameSurname_label.setFont(font)
+        self.nameSurname_label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.nameSurname_label.setObjectName("nameSurname_label")
+        self.verticalLayout.addWidget(self.nameSurname_label)
+        self.headerHorizontalLayout.addLayout(self.verticalLayout)
         spacerItem2 = QtWidgets.QSpacerItem(5, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.headerHorizontalLayout.addItem(spacerItem2)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.exitButton = QtWidgets.QPushButton(self.centralwidget)
+        self.exitButton.setStyleSheet("#exitButton\n"
+"{\n"
+"    background-color:  rgb(255,255,255,100);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120,50);\n"
+"    min-width: 1em;\n"
+"    padding: 6px;\n"
+"\n"
+"}\n"
+"QPushButton:pressed\n"
+" {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.exitButton.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.exitButton.setIcon(icon1)
+        self.exitButton.setObjectName("exitButton")
+        self.verticalLayout_2.addWidget(self.exitButton)
+        self.logout_button = QtWidgets.QPushButton(self.centralwidget)
+        self.logout_button.setStyleSheet("#logout_button\n"
+"{\n"
+"    background-color:  rgb(255,255,255,100);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120,50);\n"
+"    min-width: 1em;\n"
+"    padding: 6px;\n"
+"\n"
+"}\n"
+"QPushButton:pressed\n"
+" {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.logout_button.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("../logo/log-out.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.logout_button.setIcon(icon2)
+        self.logout_button.setObjectName("logout_button")
+        self.verticalLayout_2.addWidget(self.logout_button)
+        self.headerHorizontalLayout.addLayout(self.verticalLayout_2)
         self.gridLayout.addLayout(self.headerHorizontalLayout, 1, 0, 1, 1)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setStyleSheet("color: rgb(85, 85, 255);")
@@ -75,16 +157,6 @@ class Ui_MainWindow(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setObjectName("line")
         self.gridLayout.addWidget(self.line, 2, 0, 1, 1)
-        self.tableHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.tableHorizontalLayout.setObjectName("tableHorizontalLayout")
-        self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.tableView.setGridStyle(QtCore.Qt.DashLine)
-        self.tableView.setObjectName("tableView")
-        self.tableView.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableView.verticalHeader().setSortIndicatorShown(True)
-        self.tableHorizontalLayout.addWidget(self.tableView)
-        self.gridLayout.addLayout(self.tableHorizontalLayout, 4, 0, 1, 1)
         self.searchHorizontalLayout = QtWidgets.QHBoxLayout()
         self.searchHorizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
         self.searchHorizontalLayout.setObjectName("searchHorizontalLayout")
@@ -94,7 +166,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.searchLineEdit.sizePolicy().hasHeightForWidth())
         self.searchLineEdit.setSizePolicy(sizePolicy)
-        self.searchLineEdit.setMinimumSize(QtCore.QSize(206, 0))
+        self.searchLineEdit.setMinimumSize(QtCore.QSize(186, 0))
         self.searchLineEdit.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.searchLineEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
@@ -116,6 +188,24 @@ class Ui_MainWindow(object):
         self.searchHorizontalLayout.addWidget(self.searchLineEdit)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.searchHorizontalLayout.addItem(spacerItem3)
+        self.onlyMyPatients_button = QtWidgets.QPushButton(self.centralwidget)
+        self.onlyMyPatients_button.setStyleSheet("QPushButton {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 10em;\n"
+"    padding: 6px;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.onlyMyPatients_button.setObjectName("onlyMyPatients_button")
+        self.searchHorizontalLayout.addWidget(self.onlyMyPatients_button)
         self.manualEntryButton = QtWidgets.QPushButton(self.centralwidget)
         self.manualEntryButton.setStyleSheet("QPushButton {\n"
 "    background-color:  rgb(255,255,255);\n"
@@ -135,31 +225,84 @@ class Ui_MainWindow(object):
         self.manualEntryButton.setObjectName("manualEntryButton")
         self.searchHorizontalLayout.addWidget(self.manualEntryButton, 0, QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
         self.gridLayout.addLayout(self.searchHorizontalLayout, 3, 0, 1, 1)
-        self.line_2 = QtWidgets.QFrame(self.centralwidget)
-        self.line_2.setStyleSheet("color: rgb(85, 85, 255);")
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.line_2.setLineWidth(2)
-        self.line_2.setMidLineWidth(1)
-        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line_2.setObjectName("line_2")
-        self.gridLayout.addWidget(self.line_2, 0, 0, 1, 1)
-        self.gridLayout.setRowStretch(0, 1)
-        self.gridLayout.setRowStretch(1, 2)
-        self.gridLayout.setRowStretch(2, 1)
-        self.gridLayout.setRowStretch(3, 1)
-        self.gridLayout.setRowStretch(4, 50)
-        self.gridLayout_2.addLayout(self.gridLayout, 0, 0, 1, 1)
+        self.tableView = QtWidgets.QTableView(self.centralwidget)
+        self.tableView.setStyleSheet("QScrollBar::vertical {           \n"
+"                            border: 1px solid #999999;\n"
+"                           background:white;\n"
+"                            width:10px;    \n"
+"                            margin: 0px 0px 0px 0px;\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);   \n"
+"    padding: 6px;\n"
+"                        }\n"
+"                       QScrollBar::handle:vertical {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(50,50,120));\n"
+"                            min-height: 0px;\n"
+"                        }\n"
+"                        QScrollBar::add-line:vertical {\n"
+"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));\n"
+"                            height: 0px;\n"
+"                          subcontrol-position: bottom;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"                        QScrollBar::sub-line:vertical {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));\n"
+"                            height: 0 px;\n"
+"                          subcontrol-position: top;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"QScrollBar::horizontal {           \n"
+"                            border: 1px solid #999999;\n"
+"                           background:white;\n"
+"                            width:10px;    \n"
+"                            margin: 0px 0px 0px 0px;\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);   \n"
+"    padding: 6px;\n"
+"                        }\n"
+"                       QScrollBar::handle:horizontal {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(50,50,120));\n"
+"                            min-height: 0px;\n"
+"                        }\n"
+"                        QScrollBar::add-line:horizontal {\n"
+"                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));\n"
+"                            height: 0px;\n"
+"                          subcontrol-position: bottom;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }\n"
+"                        QScrollBar::sub-line:horizontal {\n"
+"                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));\n"
+"                            height: 0 px;\n"
+"                          subcontrol-position: top;\n"
+"                            subcontrol-origin: margin;\n"
+"                        }")
+        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.tableView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.tableView.setProperty("showDropIndicator", False)
+        self.tableView.setDragDropOverwriteMode(False)
+        self.tableView.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.tableView.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.tableView.setGridStyle(QtCore.Qt.SolidLine)
+        self.tableView.setSortingEnabled(True)
+        self.tableView.setCornerButtonEnabled(False)
+        self.tableView.setObjectName("tableView")
+        self.tableView.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableView.verticalHeader().setSortIndicatorShown(True)
+        self.gridLayout.addWidget(self.tableView, 4, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1304, 25))
-        self.menubar.setObjectName("menubar")
-        self.menuFile = QtWidgets.QMenu(self.menubar)
-        self.menuFile.setObjectName("menuFile")
-        MainWindow.setMenuBar(self.menubar)
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
-        self.menuFile.addAction(self.actionSave)
-        self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -167,7 +310,11 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "E-Triyaj"))
+        self.dateTimeEdit.setDisplayFormat(_translate("MainWindow", "dd.MM.yyyy HH:mm"))
+        self.nameSurname_label.setText(_translate("MainWindow", "Name Surname"))
+        self.exitButton.setToolTip(_translate("MainWindow", "Exit"))
+        self.logout_button.setToolTip(_translate("MainWindow", "Log Out"))
         self.searchLineEdit.setPlaceholderText(_translate("MainWindow", "Search."))
+        self.onlyMyPatients_button.setText(_translate("MainWindow", "Show Only My Patients"))
         self.manualEntryButton.setText(_translate("MainWindow", "Manual Entry"))
-        self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionSave.setText(_translate("MainWindow", "Save Table"))

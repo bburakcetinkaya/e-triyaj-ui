@@ -9,67 +9,131 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-# from httpRequests import *
 
 
-class Ui_ManualEntryWindow(object):
+class Ui_manualEntryWindow(object):
     def setupUi(self, manualEntryWindow):
         manualEntryWindow.setObjectName("manualEntryWindow")
-        manualEntryWindow.resize(527, 563)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        manualEntryWindow.resize(528, 599)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(manualEntryWindow.sizePolicy().hasHeightForWidth())
         manualEntryWindow.setSizePolicy(sizePolicy)
-        manualEntryWindow.setMinimumSize(QtCore.QSize(527, 563))
-        manualEntryWindow.setMaximumSize(QtCore.QSize(527, 563))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("logo/logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        manualEntryWindow.setWindowIcon(icon)
-        manualEntryWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.line = QtWidgets.QFrame(manualEntryWindow)
-        self.line.setGeometry(QtCore.QRect(10, 50, 491, 16))
-        self.line.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.line.setLineWidth(3)
-        self.line.setMidLineWidth(2)
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setObjectName("line")
-        self.label_2 = QtWidgets.QLabel(manualEntryWindow)
-        self.label_2.setGeometry(QtCore.QRect(12, 12, 503, 51))
+        manualEntryWindow.setMinimumSize(QtCore.QSize(96, 0))
+        manualEntryWindow.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        manualEntryWindow.setStyleSheet("#manualEntryWindow\n"
+"{\n"
+"\n"
+"background-image: url(logo/manualEntry_background.jpg);\n"
+# "background-repeat: no-repeat;\n"
+# "background-position: center;\n"
+"\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 20px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.verticalLayoutWidget = QtWidgets.QWidget(manualEntryWindow)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(11, 11, 505, 579))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("logo/e-triage_manual_entry_form.png"))
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.widget = QtWidgets.QWidget(manualEntryWindow)
-        self.widget.setGeometry(QtCore.QRect(12, 70, 491, 435))
-        self.widget.setObjectName("widget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget)
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.nameLabel = QtWidgets.QLabel(self.widget)
+        self.verticalLayout.addWidget(self.label_2)
+        self.line = QtWidgets.QFrame(self.verticalLayoutWidget)
+        self.line.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.line.setLineWidth(2)
+        self.line.setMidLineWidth(1)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setObjectName("line")
+        self.verticalLayout.addWidget(self.line)
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout.setObjectName("formLayout")
+        self.nameLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.nameLabel.setStyleSheet("QLabel \n"
+"{\n"
+"    background-color: \"transparent\"\n"
+"}")
         self.nameLabel.setObjectName("nameLabel")
-        self.gridLayout_2.addWidget(self.nameLabel, 0, 0, 1, 1)
-        self.tcLabel = QtWidgets.QLabel(self.widget)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.nameLabel)
+        self.nameEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.nameEdit.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.nameEdit.setObjectName("nameEdit")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.nameEdit)
+        self.surnameLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.surnameLabel.setObjectName("surnameLabel")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.surnameLabel)
+        self.surnameEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.surnameEdit.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.surnameEdit.setObjectName("surnameEdit")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.surnameEdit)
+        self.tcLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.tcLabel.setObjectName("tcLabel")
-        self.gridLayout_2.addWidget(self.tcLabel, 2, 0, 1, 1)
-        self.diastBPLabel = QtWidgets.QLabel(self.widget)
-        self.diastBPLabel.setObjectName("diastBPLabel")
-        self.gridLayout_2.addWidget(self.diastBPLabel, 8, 0, 1, 1)
-        self.spo2Label = QtWidgets.QLabel(self.widget)
-        self.spo2Label.setObjectName("spo2Label")
-        self.gridLayout_2.addWidget(self.spo2Label, 6, 0, 1, 1)
-        self.sysBPLabel = QtWidgets.QLabel(self.widget)
-        self.sysBPLabel.setObjectName("sysBPLabel")
-        self.gridLayout_2.addWidget(self.sysBPLabel, 9, 0, 1, 1)
-        self.ageLabel = QtWidgets.QLabel(self.widget)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.tcLabel)
+        self.tcEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.tcEdit.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.tcEdit.setObjectName("tcEdit")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.tcEdit)
+        self.ageLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.ageLabel.setObjectName("ageLabel")
-        self.gridLayout_2.addWidget(self.ageLabel, 3, 0, 1, 1)
-        self.genderLabel = QtWidgets.QLabel(self.widget)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.ageLabel)
+        self.ageEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.ageEdit.setStyleSheet("QLineEdit {\n"
+"    background-color:  rgb(255,255,255);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120);\n"
+"    font: bold 14px;\n"
+"    color: black;\n"
+"    min-width: 5em;\n"
+"    padding: 6px;\n"
+"}")
+        self.ageEdit.setObjectName("ageEdit")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.ageEdit)
+        self.genderLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.genderLabel.setObjectName("genderLabel")
-        self.gridLayout_2.addWidget(self.genderLabel, 4, 0, 1, 1)
-        self.heartRateLabel = QtWidgets.QLabel(self.widget)
-        self.heartRateLabel.setObjectName("heartRateLabel")
-        self.gridLayout_2.addWidget(self.heartRateLabel, 5, 0, 1, 1)
-        self.genderComboBox = QtWidgets.QComboBox(self.widget)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.genderLabel)
+        self.genderComboBox = QtWidgets.QComboBox(self.verticalLayoutWidget)
         self.genderComboBox.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.genderComboBox.setStyleSheet("QComboBox{\n"
 "    background-color:  rgb(255,255,255);\n"
@@ -101,70 +165,11 @@ class Ui_ManualEntryWindow(object):
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("logo/female_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.genderComboBox.addItem(icon1, "")
-        self.gridLayout_2.addWidget(self.genderComboBox, 4, 1, 1, 1)
-        self.surnameLabel = QtWidgets.QLabel(self.widget)
-        self.surnameLabel.setObjectName("surnameLabel")
-        self.gridLayout_2.addWidget(self.surnameLabel, 1, 0, 1, 1)
-        self.temperatureLabel = QtWidgets.QLabel(self.widget)
-        self.temperatureLabel.setObjectName("temperatureLabel")
-        self.gridLayout_2.addWidget(self.temperatureLabel, 7, 0, 1, 1)
-        self.nameEdit = QtWidgets.QLineEdit(self.widget)
-        self.nameEdit.setStyleSheet("QLineEdit {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
-"}")
-        self.nameEdit.setObjectName("nameEdit")
-        self.gridLayout_2.addWidget(self.nameEdit, 0, 1, 1, 1)
-        self.surnameEdit = QtWidgets.QLineEdit(self.widget)
-        self.surnameEdit.setStyleSheet("QLineEdit {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
-"}")
-        self.surnameEdit.setObjectName("surnameEdit")
-        self.gridLayout_2.addWidget(self.surnameEdit, 1, 1, 1, 1)
-        self.tcEdit = QtWidgets.QLineEdit(self.widget)
-        self.tcEdit.setStyleSheet("QLineEdit {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
-"}")
-        self.tcEdit.setObjectName("tcEdit")
-        self.gridLayout_2.addWidget(self.tcEdit, 2, 1, 1, 1)
-        self.ageEdit = QtWidgets.QLineEdit(self.widget)
-        self.ageEdit.setStyleSheet("QLineEdit {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
-"}")
-        self.ageEdit.setObjectName("ageEdit")
-        self.gridLayout_2.addWidget(self.ageEdit, 3, 1, 1, 1)
-        self.heartRateEdit = QtWidgets.QLineEdit(self.widget)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.genderComboBox)
+        self.heartRateLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.heartRateLabel.setObjectName("heartRateLabel")
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.LabelRole, self.heartRateLabel)
+        self.heartRateEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.heartRateEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -177,8 +182,11 @@ class Ui_ManualEntryWindow(object):
 "    padding: 6px;\n"
 "}")
         self.heartRateEdit.setObjectName("heartRateEdit")
-        self.gridLayout_2.addWidget(self.heartRateEdit, 5, 1, 1, 1)
-        self.spO2Edit = QtWidgets.QLineEdit(self.widget)
+        self.formLayout.setWidget(5, QtWidgets.QFormLayout.FieldRole, self.heartRateEdit)
+        self.spo2Label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.spo2Label.setObjectName("spo2Label")
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.LabelRole, self.spo2Label)
+        self.spO2Edit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.spO2Edit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -191,8 +199,11 @@ class Ui_ManualEntryWindow(object):
 "    padding: 6px;\n"
 "}")
         self.spO2Edit.setObjectName("spO2Edit")
-        self.gridLayout_2.addWidget(self.spO2Edit, 6, 1, 1, 1)
-        self.temperatureEdit = QtWidgets.QLineEdit(self.widget)
+        self.formLayout.setWidget(6, QtWidgets.QFormLayout.FieldRole, self.spO2Edit)
+        self.temperatureLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.temperatureLabel.setObjectName("temperatureLabel")
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.LabelRole, self.temperatureLabel)
+        self.temperatureEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.temperatureEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -205,8 +216,11 @@ class Ui_ManualEntryWindow(object):
 "    padding: 6px;\n"
 "}")
         self.temperatureEdit.setObjectName("temperatureEdit")
-        self.gridLayout_2.addWidget(self.temperatureEdit, 7, 1, 1, 1)
-        self.diastolicBpEdit = QtWidgets.QLineEdit(self.widget)
+        self.formLayout.setWidget(7, QtWidgets.QFormLayout.FieldRole, self.temperatureEdit)
+        self.diastBPLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.diastBPLabel.setObjectName("diastBPLabel")
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.LabelRole, self.diastBPLabel)
+        self.diastolicBpEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.diastolicBpEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -219,8 +233,11 @@ class Ui_ManualEntryWindow(object):
 "    padding: 6px;\n"
 "}")
         self.diastolicBpEdit.setObjectName("diastolicBpEdit")
-        self.gridLayout_2.addWidget(self.diastolicBpEdit, 8, 1, 1, 1)
-        self.systolicBpEdit = QtWidgets.QLineEdit(self.widget)
+        self.formLayout.setWidget(8, QtWidgets.QFormLayout.FieldRole, self.diastolicBpEdit)
+        self.sysBPLabel = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.sysBPLabel.setObjectName("sysBPLabel")
+        self.formLayout.setWidget(9, QtWidgets.QFormLayout.LabelRole, self.sysBPLabel)
+        self.systolicBpEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.systolicBpEdit.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
@@ -233,78 +250,147 @@ class Ui_ManualEntryWindow(object):
 "    padding: 6px;\n"
 "}")
         self.systolicBpEdit.setObjectName("systolicBpEdit")
-        self.gridLayout_2.addWidget(self.systolicBpEdit, 9, 1, 1, 1)
-        self.widget1 = QtWidgets.QWidget(manualEntryWindow)
-        self.widget1.setGeometry(QtCore.QRect(12, 512, 491, 39))
-        self.widget1.setObjectName("widget1")
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.widget1)
-        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.gridLayout_5 = QtWidgets.QGridLayout()
-        self.gridLayout_5.setObjectName("gridLayout_5")
-        self.manualEntryEnterButton = QtWidgets.QPushButton(self.widget1)
-        
-        self.manualEntryEnterButton.setStyleSheet("QPushButton {\n"
+        self.formLayout.setWidget(9, QtWidgets.QFormLayout.FieldRole, self.systolicBpEdit)
+        self.onlyMyDoctor_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.onlyMyDoctor_label.setObjectName("onlyMyDoctor_label")
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.LabelRole, self.onlyMyDoctor_label)
+        self.onlyMyDoctor_comboBox = QtWidgets.QComboBox(self.verticalLayoutWidget)
+        self.onlyMyDoctor_comboBox.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.onlyMyDoctor_comboBox.setStyleSheet("QComboBox{\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
 "    border-radius: 10px;\n"
 "    border-color: rgb(0, 0, 120);\n"
 "    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
+"    color: grey;\n"
+"    min-width: 10em;\n"
 "    padding: 6px;\n"
 "}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    border-style: inset;\n"
-"}")
-        self.manualEntryEnterButton.setObjectName("manualEntryEnterButton")
-        self.gridLayout_5.addWidget(self.manualEntryEnterButton, 0, 1, 1, 1)
-        self.manualEntryDiscardButton = QtWidgets.QPushButton(self.widget1)
-        
-        self.manualEntryDiscardButton.setStyleSheet("QPushButton {\n"
-"    background-color:  rgb(255,255,255);\n"
-"    border-style: outset;\n"
-"    border-width: 2px;\n"
-"    border-radius: 10px;\n"
-"    border-color: rgb(0, 0, 120);\n"
-"    font: bold 14px;\n"
-"    color: black;\n"
-"    min-width: 5em;\n"
-"    padding: 6px;\n"
+"QComboBox::drop-down \n"
+"{\n"
+"    border: 0px; /* This seems to replace the whole arrow of the combo box */\n"
 "}\n"
-"QPushButton:pressed {\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    border-style: inset;\n"
+"QComboBox::down-arrow {\n"
+"    image: url(logo/down_arrow.png);\n"
+"    width: 14px;\n"
+"    height: 14px;\n"
 "}")
-        self.manualEntryDiscardButton.setObjectName("manualEntryDiscardButton")
-        self.gridLayout_5.addWidget(self.manualEntryDiscardButton, 0, 0, 1, 1)
-        self.gridLayout_4.addLayout(self.gridLayout_5, 0, 1, 1, 1)
+        self.onlyMyDoctor_comboBox.setIconSize(QtCore.QSize(16, 16))
+        self.onlyMyDoctor_comboBox.setFrame(False)
+        self.onlyMyDoctor_comboBox.setObjectName("onlyMyDoctor_comboBox")
+        self.onlyMyDoctor_comboBox.addItem("")
+        self.onlyMyDoctor_comboBox.addItem("")
+        self.onlyMyDoctor_comboBox.addItem("")
+        self.formLayout.setWidget(10, QtWidgets.QFormLayout.FieldRole, self.onlyMyDoctor_comboBox)
+        self.verticalLayout.addLayout(self.formLayout)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(13, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_4.addItem(spacerItem, 0, 0, 1, 1)
+        self.horizontalLayout.addItem(spacerItem)
+        self.manualEntryDiscardButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.manualEntryDiscardButton.setStyleSheet("#manualEntryDiscardButton\n"
+"{\n"
+"    background-color:  rgb(255,255,255,100);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120,50);\n"
+"    min-width: 1em;\n"
+"    padding: 6px;\n"
+"\n"
+"}\n"
+"QPushButton:pressed\n"
+" {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.manualEntryDiscardButton.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("logo/discard.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.manualEntryDiscardButton.setIcon(icon2)
+        self.manualEntryDiscardButton.setObjectName("manualEntryDiscardButton")
+        self.horizontalLayout.addWidget(self.manualEntryDiscardButton)
+        self.manualEntryEnterButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.manualEntryEnterButton.setStyleSheet("#manualEntryEnterButton\n"
+"{\n"
+"    background-color:  rgb(255,255,255,100);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120,50);\n"
+"    min-width: 1em;\n"
+"    padding: 6px;\n"
+"\n"
+"}\n"
+"QPushButton:pressed\n"
+" {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.manualEntryEnterButton.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("logo/green_tick.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.manualEntryEnterButton.setIcon(icon3)
+        self.manualEntryEnterButton.setObjectName("manualEntryEnterButton")
+        self.horizontalLayout.addWidget(self.manualEntryEnterButton)
+        self.exitButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.exitButton.setStyleSheet("#exitButton\n"
+"{\n"
+"    background-color:  rgb(255,255,255,100);\n"
+"    border-style: outset;\n"
+"    border-width: 2px;\n"
+"    border-radius: 10px;\n"
+"    border-color: rgb(0, 0, 120,50);\n"
+"    min-width: 1em;\n"
+"    padding: 6px;\n"
+"\n"
+"}\n"
+"QPushButton:pressed\n"
+" {\n"
+"    background-color: rgb(0, 0, 150);\n"
+"    border-style: inset;\n"
+"}")
+        self.exitButton.setText("")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.exitButton.setIcon(icon4)
+        self.exitButton.setObjectName("exitButton")
+        self.horizontalLayout.addWidget(self.exitButton)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(manualEntryWindow)
         QtCore.QMetaObject.connectSlotsByName(manualEntryWindow)
-        
-
 
     def retranslateUi(self, manualEntryWindow):
         _translate = QtCore.QCoreApplication.translate
         manualEntryWindow.setWindowTitle(_translate("manualEntryWindow", "Manual Entry"))
         self.nameLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Name:</span></p></body></html>"))
+        self.nameEdit.setPlaceholderText(_translate("manualEntryWindow", "Name"))
+        self.surnameLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Surname:</span></p></body></html>"))
+        self.surnameEdit.setPlaceholderText(_translate("manualEntryWindow", "Surname"))
         self.tcLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">T.C. No:</span></p></body></html>"))
-        self.diastBPLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Diastolic Blood Pressure:</span></p></body></html>"))
-        self.spo2Label.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">sp0</span><span style=\" font-size:10pt; vertical-align:sub;\">2</span><span style=\" font-size:10pt;\">:</span></p></body></html>"))
-        self.sysBPLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Systolic Blood Pressure:</span></p></body></html>"))
+        self.tcEdit.setPlaceholderText(_translate("manualEntryWindow", "TC number"))
         self.ageLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Age:</span></p></body></html>"))
+        self.ageEdit.setPlaceholderText(_translate("manualEntryWindow", "Age"))
         self.genderLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Gender:</span></p></body></html>"))
-        self.heartRateLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Heart Rate:</span></p></body></html>"))
         self.genderComboBox.setItemText(0, _translate("manualEntryWindow", "Select"))
         self.genderComboBox.setItemText(1, _translate("manualEntryWindow", "MALE"))
         self.genderComboBox.setItemText(2, _translate("manualEntryWindow", "FEMALE"))
-        self.surnameLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Surname:</span></p></body></html>"))
+        self.heartRateLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Heart Rate:</span></p></body></html>"))
+        self.heartRateEdit.setPlaceholderText(_translate("manualEntryWindow", "Heart Rate"))
+        self.spo2Label.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">sp0</span><span style=\" font-size:10pt; vertical-align:sub;\">2</span><span style=\" font-size:10pt;\">:</span></p></body></html>"))
+        self.spO2Edit.setPlaceholderText(_translate("manualEntryWindow", "Oxigen Saturation in blood"))
         self.temperatureLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Temperature:</span></p></body></html>"))
-        self.manualEntryEnterButton.setText(_translate("manualEntryWindow", "Enter"))
-        self.manualEntryDiscardButton.setText(_translate("manualEntryWindow", "Discard"))
-    
+        self.temperatureEdit.setPlaceholderText(_translate("manualEntryWindow", "Body Temperature"))
+        self.diastBPLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Diastolic Blood Pressure:</span></p></body></html>"))
+        self.diastolicBpEdit.setPlaceholderText(_translate("manualEntryWindow", "Diastolic Blood Pressure"))
+        self.sysBPLabel.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Systolic Blood Pressure:</span></p></body></html>"))
+        self.systolicBpEdit.setPlaceholderText(_translate("manualEntryWindow", "Systolic Blood Pressure"))
+        self.onlyMyDoctor_label.setText(_translate("manualEntryWindow", "<html><head/><body><p align=\"right\"><span style=\" font-size:10pt;\">Who can see?</span></p></body></html>"))
+        self.onlyMyDoctor_comboBox.setItemText(0, _translate("manualEntryWindow", "Select"))
+        self.onlyMyDoctor_comboBox.setItemText(1, _translate("manualEntryWindow", "Only my doctor"))
+        self.onlyMyDoctor_comboBox.setItemText(2, _translate("manualEntryWindow", "Every doctor"))
+        self.manualEntryDiscardButton.setToolTip(_translate("manualEntryWindow", "Discard"))
+        self.manualEntryEnterButton.setToolTip(_translate("manualEntryWindow", "Enter"))
+        self.exitButton.setToolTip(_translate("manualEntryWindow", "Exit"))

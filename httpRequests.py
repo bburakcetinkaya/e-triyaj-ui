@@ -18,7 +18,7 @@ class HttpRequest(object):
         print()
 
     def requestLogin(self,name,password):#"http://localhost:8000/users/requestLogin/name/admin/password/password)
-        x = rq.get(url + '/users/requestLogin/name/'+str(name)+'/password/'+str(password))
+        x = rq.get(url + '/users/requestLogin/tc/'+str(name)+'/password/'+str(password))
         return x
 
     def getEntriesByTc(self,tc):
@@ -27,7 +27,7 @@ class HttpRequest(object):
             # print(entries.url)
             items = pd.DataFrame(entries['items'])
             items.pop('id')
-            items.pop("role")
+            items.pop("doctorID")
             items.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)             
@@ -44,15 +44,9 @@ class HttpRequest(object):
             
         
     def getEntriesByDateInterval(self,startDate,endDate):
-        emptyDict = {}
+        emptyDict = {}#http://localhost:8000/users/startDate/2022-05-22/endDate/2022-06-01"
         try:#http://192.168.1.103/users/startDate/2022-04-30/endDate/2022-04-30
             entries = rq.get(url +'/users/startDate/' + startDate +'/endDate/' +endDate).json()
-            # print(entries.status_code)
-            items = pd.DataFrame(entries['items'])
-            items.pop('id')
-            items.pop("role")
- 
-            return items
         except:
             # error_ui = Ui_ErrorWindow()
             # error_ui.setErrorMessage('Could not update table')
@@ -67,11 +61,10 @@ class HttpRequest(object):
             msg.exec_()            
             print("could not send request")
             items = pd.DataFrame(emptyDict)
-            return items
         else:
-            # print(entries)
-            print("OK")
-            return items
+            items = pd.DataFrame(entries['items'])
+            items.pop('doctorID')
+            items.pop("id")
         finally:
             return items
             
@@ -82,7 +75,7 @@ class HttpRequest(object):
             entries = rq.get(url +'/users/tc/'+ tc+'/startDate/' + startDate +'/endDate/' + endDate).json()
             items = pd.DataFrame(entries['items'])
             items.pop('id')
-            items.pop("role")
+            items.pop("doctorID")
             items.sort_values(by=['time','date'], ascending=[False,False],inplace=True)
             items.reset_index(drop=True, inplace=True)
             items.columns = map(str.upper, items.columns)  
@@ -136,7 +129,8 @@ class HttpRequest(object):
                           "temperature": 0,
                           "systolicBP": 0,
                           "diastolicBP": 0,
-                          "role": "ROLE_PATIENT",
+                          "doctorID": 0,
+                          "onlyMyDoctor": "TRUE",
                           "date": "string",
                           "time": "string"
                         }

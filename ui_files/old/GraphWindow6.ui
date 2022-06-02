@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraphWindow</class>
+ <widget class="QWidget" name="GraphWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1066</width>
+    <height>614</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Analysis Window</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#GraphWindow
+{
+background-image: url(:);
+background-repeat: no-repeat;
+background-position: center;
+
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    min-width: 5em;
+    padding: 6px;
+
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="nameLabel">
+         <property name="text">
+          <string>Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="nameEdit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="surnameLabel">
+         <property name="text">
+          <string>Surname:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="surnameEdit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="tcLabel">
+         <property name="text">
+          <string>T.C. No:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="tcEdit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="ageLabel">
+         <property name="text">
+          <string>Age:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="ageEdit">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="logout_button">
+         <property name="toolTip">
+          <string>Log Out</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#logout_button
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../logo/log-out.png</normaloff>../logo/log-out.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="exitButton">
+         <property name="toolTip">
+          <string>Exit</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#exitButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>../logo/power-off.png</normalon>
+          </iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="midLineWidth">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="startDateLabel">
+         <property name="text">
+          <string>Start Date:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="startDateEdit">
+         <property name="styleSheet">
+          <string notr="true">QDateEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}
+QDateEdit::drop-down 
+{
+    border: 0px; /* This seems to replace the whole arrow of the combo box */
+}
+QDateEdit::down-arrow {
+    image: url(../logo/down_arrow.png);
+    width: 14px;
+    height: 14px;
+}</string>
+         </property>
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="editDateLabel">
+         <property name="text">
+          <string>End Date:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="endDateEdit">
+         <property name="styleSheet">
+          <string notr="true">QDateEdit {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 5em;
+    padding: 6px;
+}
+QDateEdit::drop-down 
+{
+    border: 0px; /* This seems to replace the whole arrow of the combo box */
+}
+QDateEdit::down-arrow {
+    image: url(../logo/down_arrow.png);
+    width: 14px;
+    height: 14px;
+}</string>
+         </property>
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
+         </property>
+         <property name="accelerated">
+          <bool>true</bool>
+         </property>
+         <property name="displayFormat">
+          <string>d/M/yyyy</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="manualEntryButton">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton:pressed {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+         </property>
+         <property name="text">
+          <string>Manual Entry</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <property name="documentMode">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="graphTab">
+        <attribute name="title">
+         <string>Graph</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QGraphicsView" name="graphicsView">
+             <property name="styleSheet">
+              <string notr="true">QScrollBar:vertical {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+                        }
+                       QScrollBar::handle:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:vertical {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }
+QScrollBar:horizontal {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+                        }
+                       QScrollBar::handle:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:horizontal {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }</string>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="resizeAnchor">
+              <enum>QGraphicsView::AnchorUnderMouse</enum>
+             </property>
+             <property name="viewportUpdateMode">
+              <enum>QGraphicsView::FullViewportUpdate</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tableTab">
+        <attribute name="title">
+         <string>Table</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QTableView" name="tableView">
+             <property name="styleSheet">
+              <string notr="true">QScrollBar:vertical {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+                        }
+                       QScrollBar::handle:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:vertical {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }
+QScrollBar:horizontal {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+                        }
+                       QScrollBar::handle:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(0,0,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:horizontal {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(0,0,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }</string>
+             </property>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAsNeeded</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAsNeeded</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

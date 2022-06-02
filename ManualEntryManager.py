@@ -4,19 +4,20 @@ Created on Mon May 30 03:38:48 2022
 
 @author: piton
 """
-from PyQt5 import QtWidgets
-from ManualEntryWindow import Ui_ManualEntryWindow
+from PyQt5 import QtWidgets,QtCore
+from ManualEntryWindow import Ui_manualEntryWindow
 from httpRequests import HttpRequest
 
-class ManualEntryManager(QtWidgets.QMainWindow,Ui_ManualEntryWindow):
+class ManualEntryManager(QtWidgets.QMainWindow,Ui_manualEntryWindow):
     def __init__(self,parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.connectSignalsSlots()
-        
+        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint)
     def connectSignalsSlots(self):
         self.manualEntryEnterButton.clicked.connect(self.onEnterClicked)
         self.manualEntryDiscardButton.clicked.connect(self.onDiscardClicked)
+        self.exitButton.clicked.connect(lambda: {self.close()})
             
     def onEnterClicked(self):
         

@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1304</width>
-    <height>700</height>
+    <width>1052</width>
+    <height>527</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>96</width>
     <height>0</height>
    </size>
   </property>
@@ -33,85 +33,119 @@
     <normaloff>../logo/logo.png</normaloff>../logo/logo.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">gridline-color: rgb(0, 0, 100);
-background-color: rgb(255, 255, 255);</string>
+   <string notr="true">#MainWindow
+{
+
+background-image: url(:);
+background-repeat: no-repeat;
+background-position: center;
+
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    min-width: 5em;
+    padding: 6px;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout" rowstretch="1,2,1,1,50" columnstretch="0">
-      <property name="verticalSpacing">
-       <number>7</number>
+     <widget class="Line" name="line_2">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(85, 85, 255);</string>
       </property>
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="headerHorizontalLayout">
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="midLineWidth">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="headerHorizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>5</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="eTriageLogo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>341</width>
+          <height>81</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="pixmap">
+         <pixmap>../logo/e-triage.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <widget class="QDateTimeEdit" name="dateTimeEdit">
+          <property name="enabled">
+           <bool>false</bool>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>5</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="eTriageLogo">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>341</width>
-            <height>81</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: transparent;</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::AutoText</enum>
-          </property>
-          <property name="pixmap">
-           <pixmap>../logo/e-triage.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item alignment="Qt::AlignRight|Qt::AlignVCenter">
-         <widget class="QDateTimeEdit" name="dateTimeEdit">
-          <property name="enabled">
-           <bool>true</bool>
           </property>
           <property name="font">
            <font>
@@ -128,98 +162,170 @@ color: rgb(0, 0, 0);</string>
           <property name="frame">
            <bool>false</bool>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
           <property name="keyboardTracking">
            <bool>false</bool>
           </property>
+          <property name="displayFormat">
+           <string>dd.MM.yyyy HH:mm</string>
+          </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <widget class="QLabel" name="nameSurname_label">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
+          <property name="text">
+           <string>Name Surname</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>5</width>
-            <height>20</height>
-           </size>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
-         </spacer>
+         </widget>
         </item>
        </layout>
       </item>
-      <item row="2" column="0">
-       <widget class="Line" name="line">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(85, 85, 255);</string>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <property name="lineWidth">
-         <number>2</number>
-        </property>
-        <property name="midLineWidth">
-         <number>1</number>
-        </property>
+      <item>
+       <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-       </widget>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>5</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
-      <item row="4" column="0">
-       <layout class="QHBoxLayout" name="tableHorizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableView" name="tableView">
-          <property name="sizeAdjustPolicy">
-           <enum>QAbstractScrollArea::AdjustToContents</enum>
+         <widget class="QPushButton" name="exitButton">
+          <property name="toolTip">
+           <string>Exit</string>
           </property>
-          <property name="gridStyle">
-           <enum>Qt::DashLine</enum>
+          <property name="styleSheet">
+           <string notr="true">#exitButton
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
           </property>
-          <attribute name="horizontalHeaderCascadingSectionResizes">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-           <bool>true</bool>
-          </attribute>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normalon>../logo/power-off.png</normalon>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="logout_button">
+          <property name="toolTip">
+           <string>Log Out</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#logout_button
+{
+    background-color:  rgb(255,255,255,100);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120,50);
+    min-width: 1em;
+    padding: 6px;
+
+}
+QPushButton:pressed
+ {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../logo/log-out.png</normaloff>../logo/log-out.png</iconset>
+          </property>
          </widget>
         </item>
        </layout>
       </item>
-      <item row="3" column="0">
-       <layout class="QHBoxLayout" name="searchHorizontalLayout">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetNoConstraint</enum>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <widget class="Line" name="line">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(85, 85, 255);</string>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="lineWidth">
+       <number>2</number>
+      </property>
+      <property name="midLineWidth">
+       <number>1</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <layout class="QHBoxLayout" name="searchHorizontalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="searchLineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <item>
-         <widget class="QLineEdit" name="searchLineEdit">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>206</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLineEdit {
+        <property name="minimumSize">
+         <size>
+          <width>186</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -234,32 +340,32 @@ QLineEdit::hasFocus
 {
 color:black;
 }</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>Search.</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item alignment="Qt::AlignRight|Qt::AlignVCenter">
-         <widget class="QPushButton" name="manualEntryButton">
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Search.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="onlyMyPatients_button">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
     background-color:  rgb(255,255,255);
     border-style: outset;
     border-width: 2px;
@@ -274,53 +380,141 @@ QPushButton:pressed {
     background-color: rgb(0, 0, 150);
     border-style: inset;
 }</string>
-          </property>
-          <property name="text">
-           <string>Manual Entry</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+        </property>
+        <property name="text">
+         <string>Show Only My Patients</string>
+        </property>
+       </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="Line" name="line_2">
+      <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+       <widget class="QPushButton" name="manualEntryButton">
         <property name="styleSheet">
-         <string notr="true">color: rgb(85, 85, 255);</string>
+         <string notr="true">QPushButton {
+    background-color:  rgb(255,255,255);
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);
+    font: bold 14px;
+	color: black;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton:pressed {
+    background-color: rgb(0, 0, 150);
+    border-style: inset;
+}</string>
         </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <property name="lineWidth">
-         <number>2</number>
-        </property>
-        <property name="midLineWidth">
-         <number>1</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+        <property name="text">
+         <string>Manual Entry</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
+    <item row="4" column="0">
+     <widget class="QTableView" name="tableView">
+      <property name="styleSheet">
+       <string notr="true">QScrollBar::vertical {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);   
+    padding: 6px;
+                        }
+                       QScrollBar::handle:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(50,50,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:vertical {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:vertical {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }
+QScrollBar::horizontal {           
+                            border: 1px solid #999999;
+                           background:white;
+                            width:10px;    
+                            margin: 0px 0px 0px 0px;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 120);   
+    padding: 6px;
+                        }
+                       QScrollBar::handle:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120), stop:1 rgb(50,50,120));
+                            min-height: 0px;
+                        }
+                        QScrollBar::add-line:horizontal {
+                           background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0 rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));
+                            height: 0px;
+                          subcontrol-position: bottom;
+                            subcontrol-origin: margin;
+                        }
+                        QScrollBar::sub-line:horizontal {
+                            background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                            stop: 0  rgb(0,0,120), stop: 0.5 rgb(0,0,120),  stop:1 rgb(50,50,120));
+                            height: 0 px;
+                          subcontrol-position: top;
+                            subcontrol-origin: margin;
+                        }</string>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="showDropIndicator" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="dragDropOverwriteMode">
+       <bool>false</bool>
+      </property>
+      <property name="verticalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
+      </property>
+      <property name="horizontalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
+      </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="cornerButtonEnabled">
+       <bool>false</bool>
+      </property>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+       <bool>true</bool>
+      </attribute>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1304</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionSave"/>
-   </widget>
-   <addaction name="menuFile"/>
   </widget>
   <action name="actionSave">
    <property name="text">
