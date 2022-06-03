@@ -1,8 +1,6 @@
 
 from PyQt5 import QtWidgets,QtCore
-import threading
-# from MainManager import MainManager
-from LoginManager import LoginManager
+import LoginManager
       
 if __name__ == "__main__":
     import sys
@@ -10,10 +8,8 @@ if __name__ == "__main__":
     app.setStyle("QtCurve")
     if hasattr(QtCore.Qt, "AA_EnableHighDpiScaling"):
         QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
-    stopFlag = threading.Event()
-    window = LoginManager()
-    window.show()      
-    app.aboutToQuit.connect(stopFlag.set)
+    window = LoginManager.LoginManager()
+    window.show() 
     
     
     sys.exit(app.exec_())

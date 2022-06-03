@@ -5,57 +5,110 @@ Created on Wed Jun  1 16:45:19 2022
 @author: piton
 """
 from PyQt5 import QtWidgets,QtCore,QtGui
+import threading
+
 
 from GraphWindow import Ui_GraphWindow
 import LoginManager
 from ManualEntryManager import ManualEntryManager
+from thr import UpdateThread
 
 from Helper import Helper
 from printTable import PrintTable
 from PyQt5.QtWidgets import QMessageBox
-
+from PyQt5.QtCore import Qt,QPoint
 from httpRequests import HttpRequest
 
 from datetime import datetime
 import numpy as np
 import pyqtgraph as pg
 import pandas as pd
-import time
 
 dataHolderPatient = pd.DataFrame({})
 
 class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
-    def __init__(self,doctorID,tc,role="ROLE_ADMIN",parent=None):
+    def __init__(self,doctorID,tc,role="ROLE_ADMIN",logOutVisible = False, parent=None):
         super().__init__(parent)
         
         self.setupUi(self)
-        self.connectSignalsSlots()
-        self.scene = QtWidgets.QGraphicsScene(self) 
+        self.stopUpdateThreadFlag = threading.Event()
         self.__tc = tc
         self.__role = role
         self.__doctorID = doctorID
+        
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        
+        self.logout_button.setVisible(logOutVisible)
+        
+        self.scene = QtWidgets.QGraphicsScene(self) 
+        self.setPensBrushes()
+
+        
+        self.initDates()
+        self.initData()
+        
+        self.connectSignalsSlots()
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+    def mousePressEvent(self, event):
+        self.oldPos = event.globalPos()
+
+    def mouseMoveEvent(self, event):
+        delta = QPoint (event.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = event.globalPos()   
+        
+    def setPensBrushes(self):
+        self.red =  pg.mkPen(color=(255, 0, 0), width=2)
+        self.green = pg.mkPen(color=(0, 255, 0), width=2)
+        self.blue = pg.mkPen(color=(0, 0, 255), width=2)
+        self.lightBlue = pg.mkPen(color=(173,216,230), width=2)
+        self.purple = pg.mkPen(color=(106, 13, 173), width=2)
+      
+        self.redMarker = pg.mkBrush(color=(255, 0, 0))
+        self.greenMarker = pg.mkBrush(color=(0, 255, 0))
+        self.blueMarker = pg.mkBrush(color=(0, 0, 255))
+        self.lightBlueMarker = pg.mkBrush(color=(173,216,230))
+        self.purpleMarker = pg.mkBrush(color=(106, 13, 173))
+        
+    def initData(self):
         self.updateInformation()
+        self.updateInformationByDate()        
+        # self.updateThread = UpdateThread(self.updateInformationByDate,self.stopUpdateThreadFlag,10)
+        # self.updateThread.start()
         
-        
-        
+    def initDates(self):
+        helper = Helper()
+        self.startDateEdit.setDate(helper.getPreviousNthDay(10,asStr=False))
+        self.endDateEdit.setDate(helper.getDate(asStr=False))
+        self.endDateEdit.setMinimumDate(self.startDateEdit.date())
+        self.startDateEdit.setMaximumDate(self.endDateEdit.date())
+        self.endDateEdit.setMaximumDate(datetime.today())
     def connectSignalsSlots(self):
         self.manualEntryButton.clicked.connect(self.onManualEntry)
-        self.startDateEdit.dateChanged.connect(self.updateInformationByDate)
-        self.endDateEdit.dateChanged.connect(self.updateInformationByDate)
+        self.startDateEdit.dateChanged.connect(lambda : {self.updateInformationByDate(),self.stopUpdateThreadFlag.set()})
+        self.endDateEdit.dateChanged.connect(lambda : {self.updateInformationByDate(),self.stopUpdateThreadFlag.set()})
         self.exitButton.clicked.connect(lambda: self.close())
         self.logout_button.clicked.connect(self.logout)
-    def logout(self):
+    def closeEvent(self):
+        self.stopUpdateThreadFlag.set()
         
+    def logout(self):        
         self.window = LoginManager.LoginManager()
         self.window.show()
         self.close()
+        
     def setTc(self,tc):
         self.__tc = tc
+        
     def getTc(self):
         return self.__tc
-    def onManualEntry(self):
-        
-        
+    
+    def onManualEntry(self):  
         self.ui = ManualEntryManager()
         self.ui.ageEdit.setText(self.ageEdit.text())
         self.ui.ageEdit.setReadOnly(True)
@@ -65,17 +118,14 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         self.ui.surnameEdit.setReadOnly(True)
         self.ui.tcEdit.setText(self.tcEdit.text())
         self.ui.tcEdit.setReadOnly(True)
-        # print(self.gender)
+
         if self.gender[0] == "MALE":
             self.ui.genderComboBox.setCurrentIndex(1)    
         if self.gender[0] == "FEMALE":        
             self.ui.genderComboBox.setCurrentIndex(2)
         self.ui.genderComboBox.setEnabled(False)
-
         self.ui.show()
-        # if self.ui.closing():
-        # self.manualEntryWindow.close()
-        # self.manualEntryWindow.closeEvent(self.updateInformation(self.tcEdit.text()))
+
         
     def printTable(self,data):
         data.pop("NAME")
@@ -86,13 +136,12 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         
         toPrint = PrintTable(data)
         self.tableView.setModel(toPrint)
+        self.tableView.resizeColumnsToContents()
         
     
     def updateInformationByDate(self):
         global dataHolderPatient
-        self.endDateEdit.setMinimumDate(self.startDateEdit.date())
-        self.startDateEdit.setMaximumDate(self.endDateEdit.date())
-        self.endDateEdit.setMaximumDate(datetime.today())
+        print("Graph Window threading...")
         tc = self.tcEdit.text()
         startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
         endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
@@ -106,37 +155,28 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             msg.setInformativeText('No records found!')
             msg.setWindowTitle("Error")
             msg.exec_()
-            self.endDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
-            self.startDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())            
+            return
+            # self.endDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
+            # self.startDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())            
         elif df.equals(dataHolderPatient):
             return
         else:
+            self.spO2 = np.array(df["SP02"])
+            self.heartRate = np.array(df["HEARTRATE"])
+            self.temperature = np.array(df[ "TEMPERATURE"])
+            self.bloodPressure = [np.array(df["DIASTOLICBP"]),np.array(df["SYSTOLICBP"])]
+            self.timeInterval = np.array(df["TIME"])
+            self.gender = np.array(df["GENDER"])
+            
             self.printTable(df)
             self.printGraph(df)
-            # a = QtGui.QResizeEvent(QtGui.QResizeEvent.size(),QtGui.QResizeEvent.oldSize())
-            # self.resizeEvent(a)
+        self.stopUpdateThreadFlag.clear()
             
         
     def updateInformation(self):
         hr = HttpRequest()        
-        tc = self.__tc    
-        print("update info tc :" ,tc)
-        df = hr.getEntriesByTc(tc,self.__doctorID,self.__role)   
-        self.printGraph(df)
-        self.printTable(df)
-        # a = QtGui.QResizeEvent(QtGui.QResizeEvent.size(),QtGui.QResizeEvent.oldSize())
-        # self.resizeEvent(a)
-    def resizeEvent(self,event):
-
-        self.graphicsView.fitInView(0,0,self.scene.width(),self.scene.height())
-        QtWidgets.QMainWindow.resizeEvent(self, event)
-        
-    def resizeEvent2(self):
-        self.graphicsView.fitInView(0,0,self.scene.width(),self.scene.height())
-        
-    def printGraph(self,df):
-        
-        print(df)
+        tc = self.__tc 
+        df = hr.getEntriesByTc(tc,self.__doctorID,self.__role)  
         self.nameEdit.setText(str(df.at[0,"NAME"]))
         self.surnameEdit.setText(str(df.at[0,"SURNAME"]))
         self.tcEdit.setText(str(df.at[0,"TC"]))
@@ -149,26 +189,8 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap("logo/female_gender.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.genderDisplay.setIcon(icon)
-        self.spO2 = np.array(df["SP02"])
-        self.heartRate = np.array(df["HEARTRATE"])
-        self.temperature = np.array(df[ "TEMPERATURE"])
-        self.bloodPressure = [np.array(df["DIASTOLICBP"]),np.array(df["SYSTOLICBP"])]
-        self.timeInterval = np.array(df["TIME"])
-        self.gender = np.array(df["GENDER"])
-        
 
-        self.red =  pg.mkPen(color=(255, 0, 0), width=2)
-        self.green = pg.mkPen(color=(0, 255, 0), width=2)
-        self.blue = pg.mkPen(color=(0, 0, 255), width=2)
-        self.lightBlue = pg.mkPen(color=(173,216,230), width=2)
-        self.purple = pg.mkPen(color=(106, 13, 173), width=2)
-      
-        self.redMarker = pg.mkBrush(color=(255, 0, 0))
-        self.greenMarker = pg.mkBrush(color=(0, 255, 0))
-        self.blueMarker = pg.mkBrush(color=(0, 0, 255))
-        self.lightBlueMarker = pg.mkBrush(color=(173,216,230))
-        self.purpleMarker = pg.mkBrush(color=(106, 13, 173))
-        
+    def printGraph(self,df): 
         self.plotWdgt = pg.PlotWidget()
         self.plotWdgt.setBackground('w')
         self.legend = self.plotWdgt.addLegend(pen = 'k')
@@ -191,11 +213,24 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         
 
         self.scene.addWidget(self.plotWdgt)
-
         self.graphicsView.setScene(self.scene)  
   
         # time.sleep(0.1)
+        # self.graphicsView.fitInView(self.scene.sceneRect,QtCore.Qt.KeepAspectRatio)
+    def updateView(self):
+       rect = self.scene.sceneRect()
+       self.graphicsView.fitInView(rect, QtCore.Qt.IgnoreAspectRatio)
+
+    def showEvent(self, event):
+       # ensure that the update only happens when showing the window
+       # programmatically, otherwise it also happen when unminimizing the
+       # window or changing virtual desktop
+       if not event.spontaneous():
+           self.updateView()   
+    def resizeEvent(self,event):
         # self.graphicsView.fitInView(0,0,self.scene.width(),self.scene.height())
+        self.updateView()
+        # QtWidgets.QMainWindow.resizeEvent(self, event)
         
         # self.initialSolution_figure = plt.figure()
         # self.initialSolution_canvas = FigureCanvas(self.initialSolution_figure)

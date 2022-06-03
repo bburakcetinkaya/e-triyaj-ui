@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_GraphWindow(object):
     def setupUi(self, GraphWindow):
         GraphWindow.setObjectName("GraphWindow")
-        GraphWindow.resize(893, 600)
+        GraphWindow.resize(700, 700)
         GraphWindow.setStyleSheet("#GraphWindow\n"
 "{\n"
 "background-image: url(logo/background.jpg);\n"

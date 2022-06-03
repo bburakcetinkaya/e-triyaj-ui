@@ -13,49 +13,60 @@ from PyQt5.QtWidgets import QMessageBox
 from GraphManager import GraphManager
 import Helper
 from PyQt5 import QtCore,QtWidgets
-from thr import UpdateTableThread,UpdateTimeThread
+
+from thr import UpdateThread
 import pandas as pd
 import threading
+import time
 
 class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
-    def __init__(self,role,name,surname,tc,parent=None):
+    def __init__(self,role,name,surname,tc,showOnlyMyPatientsButton=True,parent=None):
         super().__init__(parent)
-        self.stopFlag = threading.Event()
-        self.stopFlag.clear()
         self.setupUi(self)
-        self.connectSignalsSlots()
+        self.dataHolder = pd.DataFrame({})
+        self.startThreads()
+        self.onlyMyPatients_button.setVisible(showOnlyMyPatientsButton)
+        self.onlyMyPatients_button.setCheckable(True)
+        
+        
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.showFullScreen()
         self.__tc = tc
         self.__role = role
-        self.tableThread = UpdateTableThread(self.updateTable,self.stopFlag) 
+       
         # self.__name = name
         # self.__surname = surname
         self.nameSurname_label.setText(name+" "+surname)
-        self.dataHolder = pd.DataFrame({})
+        
         self.tableView.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tableView.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.updateTable()
-        self.onlyMyPatients_button.setCheckable(True)
-        
-        
-        # self.__tableThread = UpdateTableThread(self.updateTable,stopFlag)
-        # self.__tableThread.start()
-        # self.__timeThread = UpdateTimeThread(self.updateTime,stopFlag)
-        # self.__timeThread.start()
 
-
-        
-        
-        
+        self.updateTable()        
+        self.connectSignalsSlots()
+       
     def connectSignalsSlots(self):
         self.tableView.doubleClicked.connect(self.openGraphWindow)
         self.manualEntryButton.clicked.connect(self.openManualEntryWindow)
         self.exitButton.clicked.connect(lambda: self.close())
         self.logout_button.clicked.connect(self.logout)
         self.onlyMyPatients_button.clicked.connect(self.onlyMyPatients_button_isChecked)
-    
+        # main.app.aboutToQuit.connect(self.closeEvent)
+    def closeEvent(self,event):
+        self.stopTableUpdateFlag.set()
+        self.stopTimeUpdateFlag.set()
+	
+    def startThreads(self):
+        self.stopTableUpdateFlag = threading.Event()
+        self.stopTimeUpdateFlag = threading.Event()
+        
+        self.tableThread = UpdateThread(self.updateTable,self.stopTableUpdateFlag,5)
+        self.timeThread = UpdateThread(self.updateTime,self.stopTimeUpdateFlag,1)
+        
+        self.timeThread.start()
+        time.sleep(1)
+        self.tableThread.start()
+        
     def onlyMyPatients_button_isChecked(self):
         if self.onlyMyPatients_button.isChecked():
             self.onlyMyPatients_button.setStyleSheet("QPushButton {\n"
@@ -99,15 +110,14 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
         self.dateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
         
     def updateTable(self):
+        print("Table updating...")
         helper = Helper.Helper()
-        print("hello there")
         dayToBegin = helper.getPreviousNthDay(10)
         today = helper.getDate()
         hr = HttpRequest()
         data = pd.DataFrame({})
-        # dayToBegin = helper.getPreviousNthDay(cnt+1)
         data = hr.getEntriesByDateInterval(dayToBegin,today,self.__tc,self.__role)
-        # print(data)
+        
         if data.empty:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
@@ -117,17 +127,14 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
             msg.adjustSize()                
             msg.exec_()       
             return
-        if data.equals(self.dataHolder):
+        elif data.equals(self.dataHolder):
             return
         else:         
             self.dataHolder = pd.concat([data,self.dataHolder]).drop_duplicates().reset_index(drop=True)
-            # data.sort_values(by=['date','time'], ascending=[False,False],inplace=True)
-            # data.reset_index(drop=True, inplace=True)
-            # data.columns = map(str.upper, data.columns) 
             toPrint = PrintTable(data)
             self.tableView.setModel(toPrint)
-            
-
+            self.tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+            # horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         
     def openManualEntryWindow(self): 
         self.entryUi = ManualEntryManager()

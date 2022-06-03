@@ -7,22 +7,25 @@ Created on Wed Apr 27 03:11:48 2022
 import threading
 
 
-class UpdateTableThread(threading.Thread):
-    def __init__(self,target,event):
+class UpdateThread(threading.Thread):
+    def __init__(self,target,event,secs):
         threading.Thread.__init__(self)
-        self._target = target
-        self._stopped = event
+        self.__secs = secs
+        self.__target = target
+        self.__stopped = event
+        # self.run()
 
     def run(self):
-        while not self._stopped.wait(5):
-            self._target()
+        while not self.__stopped.wait(self.__secs):
+            self.__target()
             
-class UpdateTimeThread(threading.Thread):
-    def __init__(self,target,event):
-        threading.Thread.__init__(self)
-        self._target = target
-        self._stopped = event
+# class UpdateThread1Sc(threading.Thread):
+#     def __init__(self,target,event):
+#         threading.Thread.__init__(self)
+#         self._target = target
+#         self._stopped = event
+#         # self.run()
 
-    def run(self):
-        while not self._stopped.wait(60):
-            self._target()
+#     def run(self):
+#         while not self._stopped.wait(1):
+#             self._target()

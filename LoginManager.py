@@ -10,13 +10,10 @@ from WaitingLabel import WaitingLabel
 import MainManager
 from GraphManager import GraphManager
 from httpRequests import HttpRequest
-from PyQt5 import QtWidgets,QtGui,QtCore
-from PyQt5.QtCore import Qt,QTimer,QPoint,QRect
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-from Resize import SideGrip
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt,QTimer,QPoint
+
 import time
-import json
-import pandas as pd
 
 class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
     def __init__(self,parent=None):
@@ -82,15 +79,11 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
             self.colorFlag = False
         if self.R == 120:
             self.colorFlag = True
-
-        
         
     def requestLogin(self):
-       
         self.clickFlag = False
         self.pushButton.setEnabled(False)
         self.blockSignals(True)
-
         
         self.__waitingLabel = WaitingLabel()
         self.__name = self.id_lineEdit.text()
@@ -109,6 +102,9 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
    
         if response.status_code == 200:
             self.__waitingLabel.show()
+            time.sleep(2)
+            self.close()
+            
             self.label.setText("Welcome")
             name = data["name"]
             surname = data["surname"]
@@ -116,25 +112,18 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
             role = data["role"]
             
             if role == "ROLE_ADMIN":
-                
-                self.close()
-                time.sleep(1)
-                self.newWindow = MainManager.MainManager(role,name,surname,tc)
+                self.newWindow = MainManager.MainManager(role,name,surname,tc,showOnlyMyPatientsButton=False)
                 self.newWindow.show()
-            if role == "ROLE_DOCTOR":
                 
-                self.close()
-                time.sleep(1)
+            if role == "ROLE_DOCTOR":
                 print(role," ",name," ",surname," ",tc)
                 self.newWindow = MainManager.MainManager(role,name,surname,tc)
                 self.newWindow.show()
-            if role == "ROLE_PATIENT":
                 
-                self.close()
-                time.sleep(1)
+            if role == "ROLE_PATIENT":
                 self.newWindow = GraphManager(tc,tc)
-                # self.graphUi.updateInformation()
                 self.newWindow.show()
+                
         elif response.status_code == 404:
             self.label.setText("Wrong user name or password.")
             self.label.setStyleSheet("#label{\n"
