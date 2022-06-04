@@ -12,7 +12,6 @@ from GraphManager import GraphManager
 from httpRequests import HttpRequest
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt,QTimer,QPoint
-
 import time
 
 class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
@@ -31,8 +30,8 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
 
         self.setWindowFlags(Qt.FramelessWindowHint)
         self.password_lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.passwordNewUser_lineEdit.setEchoMode((QtWidgets.QLineEdit.Password))
-        self.passwordNewUser_lineEdit2.setEchoMode((QtWidgets.QLineEdit.Password))
+        self.signUp_password1.setEchoMode((QtWidgets.QLineEdit.Password))
+        self.signUp_password2.setEchoMode((QtWidgets.QLineEdit.Password))
         self.connectSignalSlots()
         
     def connectSignalSlots(self):
@@ -40,6 +39,45 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
         self.pushButton.clicked.connect(self.requestLogin)
         self.signUp_Button.clicked.connect(lambda: {self.stackedWidget.setCurrentIndex(1)})
         self.exitButton_newUser.clicked.connect(lambda: {self.stackedWidget.setCurrentIndex(0)})
+        self.signUp_signupButton.clicked.connect(lambda: {self.createNewUser(role="ROLE_PATIENT")})
+        
+    def createNewUser(self,role="ROLE_PATIENT"):
+        pass1 = str(self.signUp_password1.text())
+        pass2 = str(self.signUp_password2.text())
+        print(pass1 , "  " ,pass2)
+        if not (pass1 == pass2):
+            self.status_label.setText("Passwords does not match!")
+            self.status_label.setStyleSheet("#status_label{\n"
+    "color: \"red\";\n"
+    "    font: 8pt \"8514oem\";\n"
+    "}")
+            return
+        tc = int(self.signUp_TC.text())
+        name = str(self.signUp_Name.text())
+        surname = str(self.signUp_Surname.text())
+        password = pass1
+        hr = HttpRequest()
+        print(tc," ",name," ",surname," ",password," ",role)
+        status = hr.postNewUser(tc,name,surname,password,role)
+        if status == 200:
+            self.status_label.setText("User created successfully.")
+            self.status_label.setStyleSheet("#status_label{\n"
+    "color: \"green\";\n"
+    "    font: 8pt \"8514oem\";\n"
+    "}")
+        elif status == -1:
+            self.status_label.setText("Failed to connect to the server!")
+            self.status_label.setStyleSheet("#status_label{\n"
+    "color: \"red\";\n"
+    "    font: 8pt \"8514oem\";\n"
+    "}")
+        else:
+            self.status_label.setText("Something gone wrong!")
+            self.status_label.setStyleSheet("#status_label{\n"
+    "color: \"red\";\n"
+    "    font: 8pt \"8514oem\";\n"
+    "}")        
+        
 
     
    
@@ -61,9 +99,6 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
         if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
             self.requestLogin()
     def logoColorChange(self):
-        
-
-        
         self.label_2.setStyleSheet("QLabel { color : rgb(%s,120,%s,%s); }" % (str(self.R),str(self.B),str(self.alpha)));
 
         if self.colorFlag:
@@ -82,25 +117,23 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
         
     def requestLogin(self):
         self.clickFlag = False
-        self.pushButton.setEnabled(False)
         self.blockSignals(True)
         
         self.__waitingLabel = WaitingLabel()
         self.__name = self.id_lineEdit.text()
         self.__password = self.password_lineEdit.text()
-        try:
-            response = self.__rq.requestLogin(self.__name,self.__password)
-        except:
+        
+        status,response = self.__rq.requestLogin(self.__name,self.__password)
+        if response == -1:    
             self.label.setText("Failed to connect server.")
             self.label.setStyleSheet("#label{\n"
     "color: \"red\";\n"
     "    font: 8pt \"8514oem\";\n"
-    "}")
-            return
-        else:
+    "}")            
+            return        
+
+        if status == 200:
             data = response.json()
-   
-        if response.status_code == 200:
             self.__waitingLabel.show()
             time.sleep(2)
             self.close()
@@ -121,21 +154,22 @@ class LoginManager(QtWidgets.QMainWindow,Ui_LoginWindow):
                 self.newWindow.show()
                 
             if role == "ROLE_PATIENT":
-                self.newWindow = GraphManager(tc,tc)
+                self.newWindow = GraphManager(tc,tc,thread="True")
                 self.newWindow.show()
                 
-        elif response.status_code == 404:
+        elif status == 404:
             self.label.setText("Wrong user name or password.")
             self.label.setStyleSheet("#label{\n"
     "color: \"red\";\n"
     "    font: 8pt \"8514oem\";\n"
     "}")
         else:
-            self.label.setText("Wrong user name or password.")
+            self.label.setText("Something gone wrong!")
             self.label.setStyleSheet("#label{\n"
     "color: \"red\";\n"
     "    font: 8pt \"8514oem\";\n"
     "}")
+        print(status)
         self.pushButton.blockSignals(False)
         self.pushButton.setEnabled(True)
         self.__waitingLabel.close()            

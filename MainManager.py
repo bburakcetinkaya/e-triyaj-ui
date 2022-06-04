@@ -12,7 +12,7 @@ from printTable import PrintTable
 from PyQt5.QtWidgets import QMessageBox
 from GraphManager import GraphManager
 import Helper
-from PyQt5 import QtCore,QtWidgets
+from PyQt5 import QtCore,QtWidgets,QtGui
 
 from thr import UpdateThread
 import pandas as pd
@@ -25,8 +25,12 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
         self.setupUi(self)
         self.dataHolder = pd.DataFrame({})
         self.startThreads()
-        self.onlyMyPatients_button.setVisible(showOnlyMyPatientsButton)
-        self.onlyMyPatients_button.setCheckable(True)
+        self.onlyMyPatients_button.setVisible(False)
+        self.searchLineEdit.setVisible(False)
+        if not showOnlyMyPatientsButton:
+            self.onlyMyPatients_button.setText("Doctor Signup")
+            self.onlyMyPatients_button.setVisible(True)
+            self.onlyMyPatients_button.clicked.connect(self.doctorSignUp)
         
         
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -44,7 +48,17 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
 
         self.updateTable()        
         self.connectSignalsSlots()
-       
+    def doctorSignUp(self):
+        self.window = LoginManager.LoginManager()
+        self.window.stackedWidget.setCurrentIndex(1)
+        # self.window.exitButton_newUser.setVisible(False)
+        self.window.exitButton_newUser.disconnect()
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("logo/power-off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.window.exitButton_newUser.setIcon(icon1)
+        self.window.signUp_signupButton.clicked.connect(lambda: self.window.createNewUser("ROLE_DOCTOR"))
+        self.window.exitButton_newUser.clicked.connect(lambda: self.window.close())
+        self.window.show()        
     def connectSignalsSlots(self):
         self.tableView.doubleClicked.connect(self.openGraphWindow)
         self.manualEntryButton.clicked.connect(self.openManualEntryWindow)
@@ -137,7 +151,7 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
             # horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         
     def openManualEntryWindow(self): 
-        self.entryUi = ManualEntryManager()
+        self.entryUi = ManualEntryManager(self.__tc)
         self.entryUi.show()       
         
     def openGraphWindow(self,signal):        

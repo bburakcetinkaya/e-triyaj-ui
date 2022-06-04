@@ -58,7 +58,7 @@ background-position: center;
        <string notr="true">background-color: rgb(255, 255, 255,0);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="loginPage">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -415,7 +415,7 @@ QPushButton:pressed
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
-                 <widget class="QLineEdit" name="name_lineEdit_2">
+                 <widget class="QLineEdit" name="signUp_Name">
                   <property name="styleSheet">
                    <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
@@ -438,7 +438,7 @@ QPushButton:pressed
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="name_lineEdit_3">
+                 <widget class="QLineEdit" name="signUp_Surname">
                   <property name="styleSheet">
                    <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
@@ -463,7 +463,7 @@ QPushButton:pressed
                </layout>
               </item>
               <item>
-               <widget class="QLineEdit" name="name_lineEdit">
+               <widget class="QLineEdit" name="signUp_TC">
                 <property name="styleSheet">
                  <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
@@ -486,7 +486,7 @@ QPushButton:pressed
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="passwordNewUser_lineEdit">
+               <widget class="QLineEdit" name="signUp_password1">
                 <property name="styleSheet">
                  <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
@@ -506,7 +506,7 @@ QPushButton:pressed
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="passwordNewUser_lineEdit2">
+               <widget class="QLineEdit" name="signUp_password2">
                 <property name="styleSheet">
                  <string notr="true">QLineEdit {
     background-color:  rgb(255,255,255);
@@ -541,7 +541,7 @@ QPushButton:pressed
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="signUp_button">
+                 <widget class="QPushButton" name="signUp_signupButton">
                   <property name="styleSheet">
                    <string notr="true">QPushButton {
     background-color:  rgb(255,255,255);

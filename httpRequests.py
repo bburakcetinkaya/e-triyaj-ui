@@ -16,10 +16,43 @@ class HttpRequest(object):
     def __init__(self):
 
         print()
-
+    def postNewUser(self,tc,name,surname,password,role):
+        postData = {
+                          "id": 0,
+                          "tc": 0,
+                          "name": "string",
+                          "surname": "string",
+                          "role": "ROLE_PATIENT",
+                          "password": "string"
+                   }
+        postData["name"] = str(name)
+        postData["surname"] = str(surname)
+        postData["tc"] = int(tc)
+        postData["password"] = str(password)
+        postData["role"] = str(role)
+        print(postData)
+        jsonPostData = json.dumps(postData)
+        status = 0
+        try:
+            x = rq.post(url + '/users/newUser', data = jsonPostData)
+        except:
+            status = -1
+        else: 
+            status = x.status_code
+        finally:
+            print(status)
+            return status
     def requestLogin(self,name,password):
-        x = rq.get(url + '/users/requestLogin/tc/'+str(name)+'/password/'+str(password))
-        return x
+        status = 0
+        try:
+            x = rq.get(url + '/users/requestLogin/tc/'+str(name)+'/password/'+str(password))
+        except: 
+            status = -1
+        else:
+            status = x.status_code
+        finally:
+            print(status,x)
+            return status,x
 
     def getEntriesByTc(self,tc,doctorID,role):
         print(tc)
@@ -115,7 +148,7 @@ class HttpRequest(object):
     #         return items  
         
     def postEntry(self,name,surname,age,gender,tc,sp02,heartRate,
-                        temperature,systolicBP,diastolicBP,onlyMyDoctor):
+                        temperature,systolicBP,diastolicBP,doctorID,onlyMyDoctor):
         self.postData = {
                           "id": 0,
                           "name": "string",
@@ -145,6 +178,7 @@ class HttpRequest(object):
         self.postData["temperature"] = float(temperature)
         self.postData["systolicBP"] = int(systolicBP)
         self.postData["diastolicBP"] = int(diastolicBP)
+        self.postData["doctorID"] = int(doctorID)
         self.postData["onlyMyDoctor"] = str(onlyMyDoctor)
         self.postData["date"] = now.strftime("%Y-%m-%d")
         self.postData["time"] = now.strftime("%H.%M.%S")
@@ -156,19 +190,9 @@ class HttpRequest(object):
             # time.sleep(3)      
 
         except: 
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Error")
-            msg.setInformativeText('Failed')
-            msg.setWindowTitle("Error")
-            msg.exec_()
+           print(00)
         else:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
-            msg.setText("Success")
-            msg.setInformativeText('Patient record entered successfully.')
-            msg.setWindowTitle("Success")
-            msg.exec_()
+           print(0)
         # finally:
             # stopFlag.clear()
 

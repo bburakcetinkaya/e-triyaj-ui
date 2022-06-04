@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
-        MainWindow.resize(638, 547)
+        MainWindow.resize(822, 637)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -234,8 +234,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.status_label)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.name_lineEdit_2 = QtWidgets.QLineEdit(self.newUserPage)
-        self.name_lineEdit_2.setStyleSheet("QLineEdit {\n"
+        self.signUp_Name = QtWidgets.QLineEdit(self.newUserPage)
+        self.signUp_Name.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -246,11 +246,11 @@ class Ui_MainWindow(object):
 "    min-width: 5em;\n"
 "    padding: 6px;\n"
 "}")
-        self.name_lineEdit_2.setText("")
-        self.name_lineEdit_2.setObjectName("name_lineEdit_2")
-        self.horizontalLayout_7.addWidget(self.name_lineEdit_2)
-        self.name_lineEdit_3 = QtWidgets.QLineEdit(self.newUserPage)
-        self.name_lineEdit_3.setStyleSheet("QLineEdit {\n"
+        self.signUp_Name.setText("")
+        self.signUp_Name.setObjectName("signUp_Name")
+        self.horizontalLayout_7.addWidget(self.signUp_Name)
+        self.signUp_Surname = QtWidgets.QLineEdit(self.newUserPage)
+        self.signUp_Surname.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -261,12 +261,12 @@ class Ui_MainWindow(object):
 "    min-width: 5em;\n"
 "    padding: 6px;\n"
 "}")
-        self.name_lineEdit_3.setText("")
-        self.name_lineEdit_3.setObjectName("name_lineEdit_3")
-        self.horizontalLayout_7.addWidget(self.name_lineEdit_3)
+        self.signUp_Surname.setText("")
+        self.signUp_Surname.setObjectName("signUp_Surname")
+        self.horizontalLayout_7.addWidget(self.signUp_Surname)
         self.verticalLayout_4.addLayout(self.horizontalLayout_7)
-        self.name_lineEdit = QtWidgets.QLineEdit(self.newUserPage)
-        self.name_lineEdit.setStyleSheet("QLineEdit {\n"
+        self.signUp_TC = QtWidgets.QLineEdit(self.newUserPage)
+        self.signUp_TC.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -277,11 +277,11 @@ class Ui_MainWindow(object):
 "    min-width: 5em;\n"
 "    padding: 6px;\n"
 "}")
-        self.name_lineEdit.setText("")
-        self.name_lineEdit.setObjectName("name_lineEdit")
-        self.verticalLayout_4.addWidget(self.name_lineEdit)
-        self.passwordNewUser_lineEdit = QtWidgets.QLineEdit(self.newUserPage)
-        self.passwordNewUser_lineEdit.setStyleSheet("QLineEdit {\n"
+        self.signUp_TC.setText("")
+        self.signUp_TC.setObjectName("signUp_TC")
+        self.verticalLayout_4.addWidget(self.signUp_TC)
+        self.signUp_password1 = QtWidgets.QLineEdit(self.newUserPage)
+        self.signUp_password1.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -292,10 +292,10 @@ class Ui_MainWindow(object):
 "    min-width: 5em;\n"
 "    padding: 6px;\n"
 "}")
-        self.passwordNewUser_lineEdit.setObjectName("passwordNewUser_lineEdit")
-        self.verticalLayout_4.addWidget(self.passwordNewUser_lineEdit)
-        self.passwordNewUser_lineEdit2 = QtWidgets.QLineEdit(self.newUserPage)
-        self.passwordNewUser_lineEdit2.setStyleSheet("QLineEdit {\n"
+        self.signUp_password1.setObjectName("signUp_password1")
+        self.verticalLayout_4.addWidget(self.signUp_password1)
+        self.signUp_password2 = QtWidgets.QLineEdit(self.newUserPage)
+        self.signUp_password2.setStyleSheet("QLineEdit {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -306,14 +306,14 @@ class Ui_MainWindow(object):
 "    min-width: 5em;\n"
 "    padding: 6px;\n"
 "}")
-        self.passwordNewUser_lineEdit2.setObjectName("passwordNewUser_lineEdit2")
-        self.verticalLayout_4.addWidget(self.passwordNewUser_lineEdit2)
+        self.signUp_password2.setObjectName("signUp_password2")
+        self.verticalLayout_4.addWidget(self.signUp_password2)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem9)
-        self.signUp_button = QtWidgets.QPushButton(self.newUserPage)
-        self.signUp_button.setStyleSheet("QPushButton {\n"
+        self.signUp_signupButton = QtWidgets.QPushButton(self.newUserPage)
+        self.signUp_signupButton.setStyleSheet("QPushButton {\n"
 "    background-color:  rgb(255,255,255);\n"
 "    border-style: outset;\n"
 "    border-width: 2px;\n"
@@ -328,8 +328,8 @@ class Ui_MainWindow(object):
 "    background-color: rgb(0, 0, 150);\n"
 "    border-style: inset;\n"
 "}")
-        self.signUp_button.setObjectName("signUp_button")
-        self.horizontalLayout_5.addWidget(self.signUp_button)
+        self.signUp_signupButton.setObjectName("signUp_signupButton")
+        self.horizontalLayout_5.addWidget(self.signUp_signupButton)
         spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem10)
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
@@ -391,10 +391,10 @@ class Ui_MainWindow(object):
         self.signUp_Button.setText(_translate("MainWindow", "Sign up"))
         self.pushButton.setText(_translate("MainWindow", "Login"))
         self.status_label.setText(_translate("MainWindow", "Welcome to E-Triage"))
-        self.name_lineEdit_2.setPlaceholderText(_translate("MainWindow", "Name:"))
-        self.name_lineEdit_3.setPlaceholderText(_translate("MainWindow", "Surname"))
-        self.name_lineEdit.setPlaceholderText(_translate("MainWindow", "TC number:"))
-        self.passwordNewUser_lineEdit.setPlaceholderText(_translate("MainWindow", "Password"))
-        self.passwordNewUser_lineEdit2.setPlaceholderText(_translate("MainWindow", "Password again"))
-        self.signUp_button.setText(_translate("MainWindow", "Sign up"))
+        self.signUp_Name.setPlaceholderText(_translate("MainWindow", "Name:"))
+        self.signUp_Surname.setPlaceholderText(_translate("MainWindow", "Surname"))
+        self.signUp_TC.setPlaceholderText(_translate("MainWindow", "TC number:"))
+        self.signUp_password1.setPlaceholderText(_translate("MainWindow", "Password"))
+        self.signUp_password2.setPlaceholderText(_translate("MainWindow", "Password again"))
+        self.signUp_signupButton.setText(_translate("MainWindow", "Sign up"))
 import backgroundLogin_rc

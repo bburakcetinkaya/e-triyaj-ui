@@ -24,18 +24,22 @@ import numpy as np
 import pyqtgraph as pg
 import pandas as pd
 
-dataHolderPatient = pd.DataFrame({})
+import time
+
+
 
 class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
-    def __init__(self,doctorID,tc,role="ROLE_ADMIN",logOutVisible = False, parent=None):
+    def __init__(self,doctorID,tc,thread=False,role="ROLE_ADMIN",logOutVisible = False, parent=None):
         super().__init__(parent)
         
-        self.setupUi(self)
-        self.stopUpdateThreadFlag = threading.Event()
+        self.setupUi(self)  
+        # self.initData()
         self.__tc = tc
         self.__role = role
         self.__doctorID = doctorID
-        
+        self.__thread = thread
+        self.dataHolderPatient = pd.DataFrame({})
+        self.initData()
         self.setWindowFlags(Qt.FramelessWindowHint)
         
         self.logout_button.setVisible(logOutVisible)
@@ -45,9 +49,14 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
 
         
         self.initDates()
-        self.initData()
+        
         
         self.connectSignalsSlots()
+    
+    def closeEvent(self,event):
+        self.stopUpdateThreadFlag.set()
+        
+        
     def center(self):
         qr = self.frameGeometry()
         cp = QtWidgets.QDesktopWidget().availableGeometry().center()
@@ -76,10 +85,14 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         self.purpleMarker = pg.mkBrush(color=(106, 13, 173))
         
     def initData(self):
+        if self.__thread:    
+            self.stopUpdateThreadFlag = threading.Event()
+            self.updateThread = UpdateThread(self.updateInformationByDate,self.stopUpdateThreadFlag,5)
+            self.updateThread.start()
         self.updateInformation()
-        self.updateInformationByDate()        
-        # self.updateThread = UpdateThread(self.updateInformationByDate,self.stopUpdateThreadFlag,10)
-        # self.updateThread.start()
+        self.updateInformationByDate() 
+
+
         
     def initDates(self):
         helper = Helper()
@@ -94,8 +107,6 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         self.endDateEdit.dateChanged.connect(lambda : {self.updateInformationByDate(),self.stopUpdateThreadFlag.set()})
         self.exitButton.clicked.connect(lambda: self.close())
         self.logout_button.clicked.connect(self.logout)
-    def closeEvent(self):
-        self.stopUpdateThreadFlag.set()
         
     def logout(self):        
         self.window = LoginManager.LoginManager()
@@ -140,7 +151,8 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         
     
     def updateInformationByDate(self):
-        global dataHolderPatient
+
+        # self.dataHolderPatient = pd.DataFrame({})
         print("Graph Window threading...")
         tc = self.tcEdit.text()
         startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
@@ -148,29 +160,25 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         hr = HttpRequest()
         df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc,self.__doctorID,self.__role)
         
-        if df.empty:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
-            msg.setText("Error")
-            msg.setInformativeText('No records found!')
-            msg.setWindowTitle("Error")
-            msg.exec_()
-            return
-            # self.endDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())
-            # self.startDateEdit.setDateTime(QtCore.QDateTime.currentDateTime())            
-        elif df.equals(dataHolderPatient):
-            return
+        if df.empty or df.equals(self.dataHolderPatient):
+            print(self.dataHolderPatient)
+              
+        
         else:
+            print(321)
+            self.dataHolderPatient = df
             self.spO2 = np.array(df["SP02"])
             self.heartRate = np.array(df["HEARTRATE"])
             self.temperature = np.array(df[ "TEMPERATURE"])
             self.bloodPressure = [np.array(df["DIASTOLICBP"]),np.array(df["SYSTOLICBP"])]
             self.timeInterval = np.array(df["TIME"])
-            self.gender = np.array(df["GENDER"])
-            
+            self.gender = np.array(df["GENDER"])            
             self.printTable(df)
+            time.sleep(1)
             self.printGraph(df)
-        self.stopUpdateThreadFlag.clear()
+            
+            
+
             
         
     def updateInformation(self):

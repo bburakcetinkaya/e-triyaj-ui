@@ -9,11 +9,12 @@ from ManualEntryWindow import Ui_manualEntryWindow
 from httpRequests import HttpRequest
 
 class ManualEntryManager(QtWidgets.QMainWindow,Ui_manualEntryWindow):
-    def __init__(self,parent=None):
+    def __init__(self,doctorID=0,parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.connectSignalsSlots()
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint)
+        self.doctorID = doctorID
     def connectSignalsSlots(self):
         self.manualEntryEnterButton.clicked.connect(self.onEnterClicked)
         self.manualEntryDiscardButton.clicked.connect(self.onDiscardClicked)
@@ -47,7 +48,7 @@ class ManualEntryManager(QtWidgets.QMainWindow,Ui_manualEntryWindow):
         
         hr = HttpRequest()
         hr.postEntry(name,surname,age,gender,tc,sp02,heartRate,
-                            temperature,systolicBP,diastolicBp,onlyMyDoctor)        
+                            temperature,systolicBP,diastolicBp,self.doctorID,onlyMyDoctor)        
         
         self.close()
 
