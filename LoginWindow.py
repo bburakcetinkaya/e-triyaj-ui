@@ -10,7 +10,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_LoginWindow(object):
     def setupUi(self, LoginWindow):
         LoginWindow.setObjectName("LoginWindow")
@@ -53,8 +52,9 @@ class Ui_LoginWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.label_2 = QtWidgets.QLabel(self.loginPage)
-        self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("logo/loginLogo_2.png"))
+        self.label_2.setText("\u2766")
+        self.label_2.setFont(QtGui.QFont("Arial",75))
+        # self.label_2.setPixmap(QtGui.QPixmap("logo/loginLogo_2.png"))
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)

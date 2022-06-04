@@ -39,23 +39,22 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         self.__doctorID = doctorID
         self.__thread = thread
         self.dataHolderPatient = pd.DataFrame({})
+        self.scene = QtWidgets.QGraphicsScene(self) 
+        self.plotWdgt = pg.PlotWidget()
+        self.setPensBrushes()
+        self.initDates()
         self.initData()
         self.setWindowFlags(Qt.FramelessWindowHint)
         
         self.logout_button.setVisible(logOutVisible)
         
-        self.scene = QtWidgets.QGraphicsScene(self) 
-        self.setPensBrushes()
-
         
-        self.initDates()
         
         
         self.connectSignalsSlots()
     
     def closeEvent(self,event):
         self.stopUpdateThreadFlag.set()
-        
         
     def center(self):
         qr = self.frameGeometry()
@@ -91,8 +90,6 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.updateThread.start()
         self.updateInformation()
         self.updateInformationByDate() 
-
-
         
     def initDates(self):
         helper = Helper()
@@ -101,6 +98,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         self.endDateEdit.setMinimumDate(self.startDateEdit.date())
         self.startDateEdit.setMaximumDate(self.endDateEdit.date())
         self.endDateEdit.setMaximumDate(datetime.today())
+        
     def connectSignalsSlots(self):
         self.manualEntryButton.clicked.connect(self.onManualEntry)
         self.startDateEdit.dateChanged.connect(lambda : {self.updateInformationByDate(),self.stopUpdateThreadFlag.set()})
@@ -136,7 +134,6 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.ui.genderComboBox.setCurrentIndex(2)
         self.ui.genderComboBox.setEnabled(False)
         self.ui.show()
-
         
     def printTable(self,data):
         data.pop("NAME")
@@ -148,25 +145,24 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         toPrint = PrintTable(data)
         self.tableView.setModel(toPrint)
         self.tableView.resizeColumnsToContents()
-        
     
     def updateInformationByDate(self):
-
-        # self.dataHolderPatient = pd.DataFrame({})
         print("Graph Window threading...")
         tc = self.tcEdit.text()
         startDate = self.startDateEdit.date().toString(QtCore.Qt.ISODate)
         endDate = self.endDateEdit.date().toString(QtCore.Qt.ISODate)
         hr = HttpRequest()
+        print("role = ",self.__role)
         df = hr.getEntriesByDateIntervalAndTc(startDate,endDate,tc,self.__doctorID,self.__role)
         
-        if df.empty or df.equals(self.dataHolderPatient):
-            print(self.dataHolderPatient)
-              
-        
+        if df.empty :
+            print("1")
+        elif df.equals(self.dataHolderPatient):
+            print("2")
         else:
-            print(321)
-            self.dataHolderPatient = df
+            print("Data changed...")
+            self.dataHolderPatient = pd.concat([df,self.dataHolderPatient]).drop_duplicates().reset_index(drop=True)
+            print(self.dataHolderPatient)
             self.spO2 = np.array(df["SP02"])
             self.heartRate = np.array(df["HEARTRATE"])
             self.temperature = np.array(df[ "TEMPERATURE"])
@@ -174,12 +170,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.timeInterval = np.array(df["TIME"])
             self.gender = np.array(df["GENDER"])            
             self.printTable(df)
-            time.sleep(1)
             self.printGraph(df)
-            
-            
-
-            
         
     def updateInformation(self):
         hr = HttpRequest()        
@@ -199,7 +190,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.genderDisplay.setIcon(icon)
 
     def printGraph(self,df): 
-        self.plotWdgt = pg.PlotWidget()
+        self.plotWdgt.clear()
         self.plotWdgt.setBackground('w')
         self.legend = self.plotWdgt.addLegend(pen = 'k')
         self.legend.setBrush('white')

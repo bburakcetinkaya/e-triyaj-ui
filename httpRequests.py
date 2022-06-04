@@ -44,6 +44,7 @@ class HttpRequest(object):
             return status
     def requestLogin(self,name,password):
         status = 0
+        x = 0
         try:
             x = rq.get(url + '/users/requestLogin/tc/'+str(name)+'/password/'+str(password))
         except: 
@@ -51,7 +52,7 @@ class HttpRequest(object):
         else:
             status = x.status_code
         finally:
-            print(status,x)
+            # print(status,x)
             return status,x
 
     def getEntriesByTc(self,tc,doctorID,role):
@@ -85,9 +86,8 @@ class HttpRequest(object):
             entries = rq.get(url +'/users/startDate/' + startDate +'/endDate/' +endDate).json()
             items = pd.DataFrame(entries['items'])
         except:
-            emptyDict = {}
             print("could not send request")
-            items = pd.DataFrame(emptyDict)
+            items = pd.DataFrame({})
             
         else:            
             print("OK")

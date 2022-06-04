@@ -142,6 +142,7 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
             msg.exec_()       
             return
         elif data.equals(self.dataHolder):
+            print(3)
             return
         else:         
             self.dataHolder = pd.concat([data,self.dataHolder]).drop_duplicates().reset_index(drop=True)
