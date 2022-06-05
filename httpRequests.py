@@ -10,7 +10,8 @@ from PyQt5.QtWidgets import QMessageBox
 import pandas as pd
 from datetime import datetime
 import json
-url = "http://localhost:8000"
+config = open("config/url.txt", "r")
+url = config.read()
 
 class HttpRequest(object):
     def __init__(self):

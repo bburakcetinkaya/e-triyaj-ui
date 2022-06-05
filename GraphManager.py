@@ -29,7 +29,7 @@ import time
 
 
 class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
-    def __init__(self,doctorID,tc,thread=False,role="ROLE_ADMIN",logOutVisible = False, parent=None):
+    def __init__(self,doctorID,tc,role="ROLE_ADMIN",thread=False,logOutVisible = False, parent=None):
         super().__init__(parent)
         
         self.setupUi(self)  
@@ -162,12 +162,7 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
         else:
             print("Data changed...")
             self.dataHolderPatient = pd.concat([df,self.dataHolderPatient]).drop_duplicates().reset_index(drop=True)
-            print(self.dataHolderPatient)
-            self.spO2 = np.array(df["SP02"])
-            self.heartRate = np.array(df["HEARTRATE"])
-            self.temperature = np.array(df[ "TEMPERATURE"])
-            self.bloodPressure = [np.array(df["DIASTOLICBP"]),np.array(df["SYSTOLICBP"])]
-            self.timeInterval = np.array(df["TIME"])
+            print(self.dataHolderPatient)            
             self.gender = np.array(df["GENDER"])            
             self.printTable(df)
             self.printGraph(df)
@@ -190,6 +185,12 @@ class GraphManager(QtWidgets.QMainWindow,Ui_GraphWindow):
             self.genderDisplay.setIcon(icon)
 
     def printGraph(self,df): 
+        df2 = df.copy()
+        df2 = df2.loc[::-1].reset_index(drop=True).head()
+        self.spO2 = np.array(df2["SP02"])
+        self.heartRate = np.array(df2["HEARTRATE"])
+        self.temperature = np.array(df2[ "TEMPERATURE"])
+        self.bloodPressure = [np.array(df2["DIASTOLICBP"]),np.array(df2["SYSTOLICBP"])]
         self.plotWdgt.clear()
         self.plotWdgt.setBackground('w')
         self.legend = self.plotWdgt.addLegend(pen = 'k')

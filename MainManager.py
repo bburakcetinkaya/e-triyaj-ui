@@ -158,7 +158,7 @@ class MainManager(QtWidgets.QMainWindow,Ui_MainWindow):
     def openGraphWindow(self,signal):        
              
         self.__tc = signal.sibling(signal.row(),4).data()  
-        self.graphUi = GraphManager(self.__tc,self.__tc,self.__role) 
+        self.graphUi = GraphManager(self.__tc,self.__tc,self.__role,thread="True") 
         # self.graphUi.updateInformation()
         # self.graphUi.setTc()
         # self.graphUi.updateInformation()
